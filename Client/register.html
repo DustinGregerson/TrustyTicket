@@ -1,0 +1,92 @@
+
+    <main>
+        <div class="container">
+            <div class="left">
+                <h1>Create a free <br>
+                    account to start <br>
+                    hosting an event 
+                </h1>
+                <form id="target" method="post">
+                    <input type="hidden" name="api_function_call" value="register">
+
+                    <span id="username_error"></span>
+                    <input type="text" placeholder="Your user name" required name="username">
+
+                    <span id="password_error"></span>
+                    <input type="password" placeholder="Your password" required name="password">
+
+                    <span id="email_error"></span>
+                    <input type="email" placeholder="Your email address" required name="email">
+
+                    <button type="submit">Next</button>
+                </form>
+                <p>Already have an account? <a href="?action=login">Sign in</a></p>
+            </div>
+            <div class="right"></div>
+        </div>
+    </main>
+
+    <script>
+        $('#target').submit(function(event) {
+        event.preventDefault();
+        var apiCall=$("#api_function_call").val();
+        var type='POST';
+        var formData=$(this).serialize();
+        var usernameError=$("#username_error");
+        var passwordError=$("#password_error");
+        var emailError=$("#email_error");
+        usernameError.html("");
+        passwordError.html("");
+        emailError.html("");
+        var data={};
+        
+        $.ajax({
+            type: type,
+            url: 'http://localhost/project/trustyticket/serviceProvider/API.php',
+            data: formData , 
+            dataType: 'json',
+            encode: true
+        })
+        .done(function(data) {
+            console.log(data);
+            var error=false;
+            if(data['username_length']){
+               usernameError.html(usernameError.html()+data['username_length']+"<br>");
+               error=true;
+            }
+            if(data['username_exists']){
+                usernameError.html(usernameError.html()+data['username_exists']+"<br>");
+                error=true;
+            }
+            if(data['password_length']){
+                passwordError.html(passwordError.html()+data['password_length']+"<br>");
+                error=true;
+            }
+            if(data['password_cap_letter']){
+                passwordError.html(passwordError.html()+data['password_cap_letter']+"<br>");
+                error=true;
+            }
+            if(data['password_number']){
+                passwordError.html(passwordError.html()+data['password_number']+"<br>");
+                error=true;
+            }
+            if(data['password_special_char']){
+                passwordError.html(passwordError.html()+data['password_special_char']+"<br>");
+                error=true;
+            }
+            if(data['email_invalid']){
+                emailError.html(data['email_invalid']);
+                error=true;
+            }
+
+            if(!error){
+                window.location.href="";
+            }
+    
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+                console.error('Error:', textStatus, errorThrown);
+                console.log(data);
+        });
+    });
+    </script>
