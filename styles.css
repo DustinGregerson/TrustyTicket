@@ -214,6 +214,13 @@ form button {
     margin-bottom: 20px;
     color: #003366;
 }
+/*Added back in to center the sign in and create account forms*/
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 /* Added this for create_event.html below*/
 main.create_form {
