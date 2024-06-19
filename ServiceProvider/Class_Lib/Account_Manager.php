@@ -74,14 +74,24 @@ public $error=[];
 
         if(empty($this->error)){
             $password=password_hash($password,PASSWORD_DEFAULT);
-
-            $query="INSERT INTO users (username,password,email) values(:username,:password,:email)";
+            $query="INSERT INTO users (username,password,email,first_name,last_name,state) values(:username,:password,:email,:first_name,:last_name,:state)";
 
             $statment=$this->conn->prepare($query);
             $statment->bindValue(":username",$username);
             $statment->bindValue(":password",$password);
             $statment->bindValue(":email",$email);
+            $statment->bindValue(":first_name",htmlspecialchars($_POST["first_name"]));
+            $statment->bindValue(":last_name",htmlspecialchars($_POST["last_name"]));
+            $statment->bindValue(":state",htmlspecialchars($_POST["state"]));
+            try{
             $statment->execute();
+            }
+            catch(PDOException $e){
+                if($e->getCode()=="23000"){
+                    $this->error["email_exists"]="This email is being used by another account. Please choose another email";
+                    return $this->error;
+                }
+            }
             if($statment->rowCount()>0){
                 $_SESSION["username"]=$username;
                 $query="SELECT * FROM users WHERE username=:username";

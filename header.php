@@ -26,7 +26,7 @@
                 <li><a href="?sub=add_event" class="create-event">+ Create Events</a></li>
                 <li><a href="hub.html">Dashboard</a></li>
                 <li><a href="#manage-events">Manage Events</a></li>
-                <li><a href="#tickets">Tickets</a></li>
+                <li><a href="?action=tickets">Tickets</a></li>
                 <li><a href="#payment">Payment</a></li>
                 <li><a href="?action=logout">Log Out</a></li>
             </ul>

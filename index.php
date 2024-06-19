@@ -20,6 +20,7 @@ if (!isset($_SESSION['ip_address'])) {
     // Possible session hijacking attempt, destroy the session
     session_destroy();
 }
+
 if(isset($_SESSION["username"])){
     if(!isset($_GET["action"])){
         $_GET["action"]="hub";
@@ -56,6 +57,9 @@ switch($_GET["action"]){
         //when the website is build this would redirect to the login screen
         header("Location:index.php");
     break;
+    case "tickets":
+        include_once("Client/Ticket_Purchase_Form.html");
+    break;
 }
 include("footer.php");
 
@@ -69,10 +73,10 @@ $tablePrinter->getTableUpdateInputs("pictures","0",["event_id","picture_id"]);
 $tablePrinter->endForm("Save");
 $tablePrinter->writeFormToFile("test.php");
 */
-
+/*
 $queryBuilder=new Tables_Query_Builder();
 $queryBuilder->buildUpdateQuery("events","event_id=:event_id",["times_changed","user_id","event_code"]);
 $queryBuilder->buildStatmentBinder("events",'$_POST',["times_changed","user_id","event_id","event_code"]);
 $queryBuilder->writeToFile("test.php");
-
+*/
 ?>

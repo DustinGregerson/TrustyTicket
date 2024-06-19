@@ -1,10 +1,10 @@
 <?php
-include_once("serviceProvider/Class_lib/Events_Manager.php");
-include_once("serviceProvider/Class_lib/Picture_Formatter.php");
-$event_manager=new Events_Manager();
-$events=$event_manager->GetAllUserEvents();
+    include_once("serviceProvider/Class_lib/Events_Manager.php");
+    include_once("serviceProvider/Class_lib/Picture_Formatter.php");
+    $event_manager=new Events_Manager();
+    $events=$event_manager->GetAllUserEvents();
 ?>
-
+<a href="ServiceProvider/Class_Lib/Ticket_Manager.php">Test Link</a>
         <main class="content">
         <div class="event-sort">
             <a href="events.php?sort=past">Past Events</a>
@@ -26,7 +26,9 @@ $events=$event_manager->GetAllUserEvents();
                             <p>$<?php echo($event["charge"]);?></p>
                             <p><?php echo($event["event_start"]);?> - <?php echo($event["event_end"]);?></p>
                             <p><?php echo($event["event_description"]);?></p>
-                            <a href="?sub=edit_event&event_id=<?php echo($event["event_id"])?>">Edit</a>
+                            <?php if(strtotime($event["event_start"])>time()):?>
+                                <a href="?sub=edit_event&event_id=<?php echo($event["event_id"])?>">Edit</a>
+                            <?php endif;?>
                         </div>
                     </div>
                     <?php endforeach;?>

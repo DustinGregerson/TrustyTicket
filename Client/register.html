@@ -137,9 +137,13 @@
                 emailError.html(data['email_invalid']);
                 error=true;
             }
+            if(data['email_exists']){
+                emailError.html(data['email_exists']);
+                error=true;
+            }
 
             if(!error){
-                window.location.href="";
+                window.location.href="http://localhost/project/trustyticket";
             }
     
         })

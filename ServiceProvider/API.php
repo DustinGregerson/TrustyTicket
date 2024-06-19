@@ -25,6 +25,12 @@ if(isset($_POST["api_function_call"])){
             $event_manager=new Events_Manager();
             $data=$event_manager->update_event();
         break;
+        case "buy_ticket":
+            include_once("Class_lib/Ticket_Manager.php");
+            $_POST["amount"]=5000;//test
+            $ticket_Manager= new Ticket_Manager();
+            $data=$ticket_Manager->PaymentIntent();
+        break;
     }
     print(json_encode($data));
 }

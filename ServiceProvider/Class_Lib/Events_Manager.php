@@ -138,7 +138,7 @@ class Events_Manager{
             $statment->bindValue(":private_event",$_POST["private_event"]);
             try{
                 $statment->execute();
-                if(isset($_FILES["image"])){
+                if(isset($_FILES["image"])&& $_FILES["image"]["error"] !== UPLOAD_ERR_NO_FILE){
                     include_once("Picture_Formatter.php");
                     $query="UPDATE pictures SET picture=:picture WHERE event_id=:event_id";
                     $pic=ConvertToBlob();
@@ -150,7 +150,7 @@ class Events_Manager{
                         return true;
                     }
                     catch(PDOException $e){
-
+                        return $e->getCode();
                     }
                 }
                 else{
@@ -158,7 +158,7 @@ class Events_Manager{
                 }
             }
             catch(PDOException $e){
-                return $e;
+                return $e->getCode();
             }
 
         }

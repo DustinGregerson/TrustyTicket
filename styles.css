@@ -325,6 +325,10 @@ label[for="show_event"], label[for="private_event"]  {
     margin-top: -10px; 
 }
 
+#payment-form{
+    width:100%;
+    flex-direction: column;
+}
 
 
 

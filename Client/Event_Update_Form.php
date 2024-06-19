@@ -31,7 +31,17 @@
             There will not be a error message because the user should not have gotten to this page through normal means
             if A OR B are tripped.
         */
-        
+
+        //There is no reason this should happen unless someone is doing something that they shouldn't be doing
+        //I will implement a banning system for this in the future.
+        if($_SESSION["user_id"]!=$record["user_id"]){
+            session_destroy();
+            header("Location:index.php");
+        }
+        //A user may be able to do this on accident they will be returned to the hub.
+        if(strtotime($record["event_start"])<time()){
+            header("Location:index.php");
+        }
         
     $ticketsBought=$ticketsBought["count(*)"];
 ?>
@@ -72,7 +82,7 @@
 
                 <div class="form_seat">
                     <label for="max_seats">Number of Seats*</label>
-			        <input type="number" min="<?php echo($max_seats)?>" step="any" max="100" name=max_seats value="<?php echo($max_seats);?>">
+			        <input type="number" min="<?php echo($ticketsBought)?>" step="any" max="100" name=max_seats value="<?php echo($max_seats);?>">
                 </div>
 
                 <!--Charge-->
@@ -187,7 +197,6 @@
 <script>
     $('#target').submit(function(event) {
         event.preventDefault();
-        var apiCall=$("#api_function_call").val();
         var type='POST';
         var formData=new FormData(this);
         var error=$("#error");
@@ -203,9 +212,37 @@
             encode: true
         })
         .done(function(data) {
+            var message="";
             console.log(data);
-            var errorValue=false;
-            window.location.href="http://localhost/project/trustyticket";
+
+            if(data===true){
+                window.location.href="http://localhost/project/trustyticket";
+            }
+            /*
+                In typical use cases, these errors should only come up once because the server will return the html document with
+                with input fields as display only, or the radio buttons will be disabled if the event values can not be changed.
+                However, if a ticket is bought in the middle of a user update, then these errors can occur.
+
+                Or someone is doing something that they shouldn't be doing that can land them in federal prison....
+            */
+            switch(Number(data)){
+                case 45000:message="You can not stop showing the event on the site because tickets have been sold for it";
+                break;
+                case 45001:message="The event dates can not be changed because the event has started";
+                break;
+                case 45002:message="You can not update this event dates because you have already changed them three times.";
+                break;
+                case 45003:message="You can not update the number of seats to a number less than the number of tickets sold or above 100 seats";
+                break;
+                case 45004:message="event start date or event end date can not be less than there original set dates because tickets have already been purchased";
+                break;
+                case 45005:message="The length of the event must be between 1-14 days";
+                break;
+                case 45006:message="The events privacy can not be changed tickets have already been purchased for this event";
+                break;
+                default:message="An error has occured please try again or call customer Support.";
+            }
+            console.log(message);
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
                 console.error('Error:', textStatus, errorThrown);
@@ -213,133 +250,6 @@
         });
     });
 </script>
-
-<!--
-	<form id="target" method=POST action="ServiceProvider/API.php" enctype="multipart/form-data">
-		<input type="hidden" name="api_function_call" value=update_event>
-
-			<input type="hidden" hidden name=event_id value="<?php echo($event_id);?>">
-            
-			<label for="name">Name:</label>
-			<input type="text" name=name value="<?php echo($name)?>">
-         
-			<label for="event_description">Description:</label>
-			<textarea name=event_description><?php echo($event_description)?></textarea>
-
-          
-			<label for="max_seats">Number of Attendants:</label>
-			<input type="number" min="<?php echo($max_seats)?>" step="any" max="100" name=max_seats value="<?php echo($max_seats);?>">
-
-
-            <?php if(($times_changed<3) || (!$ticketsBought)):?>
-                <label for="event_start">Start Date:</label>
-                <input type="datetime-local" name=event_start value="<?php echo($event_start)?>">
-
-                <label for="event_end">End Date:</label>
-                <input type="datetime-local" name=event_end value="<?php echo($event_end)?>">
-          
-            <?php else:?>
-                <label for="event_start">Start Date:</label>
-                <input type="datetime-local" readonly name=event_start value="<?php echo($event_start)?>">
-
-                <label for="event_end">End Date:</label>
-                <input type="datetime-local" readonly name=event_end value="<?php echo($event_end)?>">
-            <?php endif;?>
-
-			<label for="charge">Charge Per Ticket:</label>
-			<input type="number" max="9999" min="0.01"step="0.01"name="charge"value="<?php echo($charge)?>">
-            
-			<label for="times_changed"># of Updates To This event</label>
-			<input type="number" min=1 step="any" max="3" readonly name=times_changed value="<?php echo($times_changed);?>">
-           
-			<div>Make event visiable on site:
-            <?php if($show_event):?>
-                   
-                    <?php if(!$ticketsBought):?>
-                        <label for="show_event"> yes </label>
-                        <input id="show_event" checked type="radio" name="show_event" value="1">
-
-                        <label for="show_event"> no </label>
-                        <input id="show_event"  type="radio" name="show_event" value="0">
-                  </div>
-               
-                    <?php else:?>
-                        <label for="show_event"> yes </label>
-                        <input id="show_event" checked readonly type="radio" name="show_event" value="1">
-
-                        <label for="show_event"> no </label>
-                        <input id="show_event" disabled type="radio" name="show_event" value="0">
-                  </div>
-                    <?php endif;?>
-
-            <?php else:?>
-                    
-                    <?php if(!$ticketsBought):?>
-
-                    <label for="show_event"> yes </label>
-                    <input id="show_event" type="radio" name="show_event" value="1">
-
-                    <label for="show_event"> no </label>
-                    <input id="show_event" checked type="radio" name="show_event" value="0">
-
-                </div>
-                    
-                    <?php else:?>
-                    <label for="show_event"> yes </label>
-                    <input id="show_event" disabled type="radio" name="show_event" value="1">
-
-                    <label for="show_event"> no </label>
-                    <input id="show_event" checked type="radio" name="show_event" value="0">
-                </div>
-                    <?php endif;?>
-            <?php endif;?>
-            
-			<div>Private Event:
-          
-                <?php if($private_event):?>
-                   
-                    <?php if(!$ticketsBought):?>
-                        <label for="private_event"> yes </label>
-                        <input id="private_event" checked type="radio" name="private_event" value="1">
-
-                        <label for="private_event"> no </label>
-                        <input id="private_event"  type="radio" name="private_event" value="0">
-                 
-                    <?php else:?>
-                        <label for="private_event"> yes </label>
-                        <input id="private_event" checked type="radio" name="private_event" value="1">
-
-                        <label for="private_event"> no </label>
-                        <input id="private_event" disabled type="radio" name="private_event" value="0">
-                    <?php endif;?>
-                </div>
-
-                <?php else:?>
-                     
-                    <?php if(!$ticketsBought):?>
-                        <label for="private_event"> yes </label>
-                        <input id="private_event" type="radio" name="private_event" value="1">
-                        
-                        <label for="private_event"> no </label>
-                        <input id="private_event" checked type="radio" name="private_event" value="0">
-                  
-                    <?php else:?>
-
-                        <label for="private_event"> yes </label>
-			            <input id="private_event" disabled type="radio" name="private_event" value="1">
-
-				        <label for="private_event"> no </label>
-				        <input id="private_event" checked type="radio" name="private_event" value="0">
-
-                    <?php endif;?>
-                </div>
-            <?php endif;?>
-    <div>
-        <img src="<?php echo(ConvertToImgString($picture))?>">
-    </div>
-    <input type="file" accept="image/*" name="image">
-	<button type="submit">submit</button>
-</form>
 
 
                     
