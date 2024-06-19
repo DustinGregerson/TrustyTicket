@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrustyTicket</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body class="hub">
+    <div class="container">
+      <nav class="sidebar">
+        <div class="sidebar-header">
+          <h1>TrustyTicket</h1>
+        </div>
+        <ul>
+          <li>
+            <a href="create_event.html" class="create-event">+ Create Events</a>
+          </li>
+          <li><a href="hub.html">Dashboard</a></li>
+          <li><a href="#manage-events">Manage Events</a></li>
+          <li><a href="#tickets">Tickets</a></li>
+          <li><a href="#payment">Payment</a></li>
+        </ul>
+        <div class="host-rating">
+          <h1>Your Host Rating: <span id="host-rating">0-10</span></h1>
+        </div>
+      </nav>
+      <main class="content">
+        <section class="display_event_form">
+          <h1>Event Details</h1>
+
+          <!--Pictures for event-->
+          <div class="detail_picture">
+            <label for="picture"></label>
+            <img src="images/test.jpg" width="482" height="87" />
+          </div>
+
+          <!--Event Name-->
+          <div class="detail_name">
+            <label for="name">Name</label>
+            <p id="name">Sample Event Name</p>
+          </div>
+
+          <!--Charge-->
+          <div class="detail_charge">
+            <label for="charge">Charge</label>
+            <p id="charge">$50.00</p>
+          </div>
+
+          <!--Start date-->
+          <div class="detail-start">
+            <label for="event_start">Start Date</label>
+            <p id="event_start">2023-12-01T10:00</p>
+          </div>
+
+          <!--End date-->
+          <div class="detail-end">
+            <label for="event_end">End Date</label>
+            <p id="event_end">2023-12-01T18:00</p>
+          </div>
+
+          <!--Max Seats-->
+          <div class="detail_seat">
+            <label for="max_seats">Max Seats</label>
+            <p id="max_seats">100</p>
+          </div>
+
+          <!-- Buy Ticket Button -->
+          <div class="buy-ticket">
+            <a href="#" class="buy-ticket-button">Buy Ticket</a>
+          </div>
+
+          <!--Description-->
+          <div class="detail_description">
+            <label for="event_description">Event Description</label>
+            <p id="event_description">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+              blandit enim vel nisi aliquet congue. Donec in sapien vel neque
+              iaculis tincidunt ac vitae ex. Cras gravida mi turpis. Curabitur
+              at augue non lacus tincidunt sollicitudin at eget lacus. Etiam
+              sodales justo in nibh venenatis, vitae elementum nibh mollis. Ut
+              id magna sapien. Donec porta justo justo, id maximus erat dictum
+              ac
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
