@@ -4,7 +4,6 @@
     $event_manager=new Events_Manager();
     $events=$event_manager->GetAllUserEvents();
 ?>
-<a href="ServiceProvider/Class_Lib/Ticket_Manager.php">Test Link</a>
         <main class="content">
         <div class="event-sort">
             <a href="events.php?sort=past">Past Events</a>

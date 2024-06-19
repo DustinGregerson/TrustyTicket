@@ -26,11 +26,14 @@ if(isset($_SESSION["username"])){
         $_GET["action"]="hub";
     }
 }
+
 else{
     if(!isset($_GET["action"]))
     $_GET["action"]="login";
 }
+
 include("header.php");
+
 switch($_GET["action"]){
     case "hub":
         if(!isset($_GET["sub"])){
