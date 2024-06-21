@@ -28,6 +28,7 @@
                             <?php if(strtotime($event["event_start"])>time()):?>
                                 <a href="?sub=edit_event&event_id=<?php echo($event["event_id"])?>">Edit</a>
                             <?php endif;?>
+                            <a href="?action=event_details&event_id=<?php echo($event["event_id"])?>">Event Details</a>
                         </div>
                     </div>
                     <?php endforeach;?>

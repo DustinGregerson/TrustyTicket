@@ -6,6 +6,7 @@
         $ticketsBought=$event_manager->getTicketCount();
         $record=$event_manager->getRecord();
 
+
         $event_id=$record["event_id"];
         $name=$record["name"];
         $event_description=$record["event_description"];
@@ -18,7 +19,6 @@
         $private_event=$record["private_event"];
         $event_code=$record["event_code"];
         $picture_id=$record["picture_id"];
-        $event_id=$record["event_id"];
         $picture=$record["picture"];
         /*
             This is where were going to check

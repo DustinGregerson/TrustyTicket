@@ -66,7 +66,6 @@ class Events_Manager{
         $statment->bindValue(":charge",$_POST["charge"]);
         $statment->bindValue(":show_event",$_POST["show_event"]);
         $statment->bindValue(":private_event",$_POST["private_event"]);
-
         $statment->execute();
         $lastId=$this->conn->lastInsertId();
             //row inserted
@@ -94,25 +93,40 @@ class Events_Manager{
                 return false;
             }
         }
-        public function getRecord(){
+        public function getRecord(...$event_id){
             $query="SELECT * FROM Events where event_id=:event_id";
             $statment=$this->conn->prepare($query);
-            $statment->bindValue(":event_id",$_GET["event_id"]);
-            $statment->execute();
-            $event=$statment->fetchAll(PDO::FETCH_ASSOC);
-            $event=$event[0];
 
-            $statment->closeCursor();
-            $query="SELECT * FROM pictures WHERE pictures.event_id=:event_id LIMIT 1";
-            $statment=$this->conn->prepare($query);
-            $statment->bindValue(":event_id",$event["event_id"]);
-            $statment->execute();
-            $pic=$statment->fetchAll(PDO::FETCH_ASSOC);
-            $pic=$pic[0];
-            $event["picture_id"]=$pic["picture_id"];
-            $event["picture"]=$pic["picture"];
-            $statment->closeCursor();
-            return $event;
+            if(empty($event_id)){
+                $statment->bindValue(":event_id",$_GET["event_id"]);
+                $statment->execute();
+                $event=$statment->fetchAll(PDO::FETCH_ASSOC);
+                $event=$event[0];
+                $statment->closeCursor();
+                $query="SELECT * FROM pictures WHERE pictures.event_id=:event_id LIMIT 1";
+                $statment=$this->conn->prepare($query);
+                $statment->bindValue(":event_id",$event["event_id"]);
+                $statment->execute();
+
+                $pic=$statment->fetchAll(PDO::FETCH_ASSOC);
+                if(!empty($pic)){
+                    $pic=$pic[0];
+                    $event["picture_id"]=$pic["picture_id"];
+                    $event["picture"]=$pic["picture"];
+                }
+                $statment->closeCursor();
+                
+                return $event;
+            }
+            else{
+                $event_id=$event_id[0];
+                $statment->bindValue(":event_id",$event_id);
+                $statment->execute();
+                $event=$statment->fetchAll(PDO::FETCH_ASSOC);
+                $event=$event[0];
+                $statment->closeCursor();
+                return $event;
+            }
         }
         public function getTicketCount(){
             $query="SELECT count(*) FROM Tickets WHERE event_id=:event_id";

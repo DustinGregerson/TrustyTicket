@@ -28,7 +28,7 @@ if(isset($_POST["api_function_call"])){
         case "buy_ticket":
             include_once("Class_lib/Ticket_Manager.php");
             $_POST["amount"]=5000;//test
-            $ticket_Manager= new Ticket_Manager();
+            $ticket_Manager= new Payment_Manager();
             $data=$ticket_Manager->PaymentIntent();
         break;
     }

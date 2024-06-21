@@ -57,10 +57,16 @@ switch($_GET["action"]){
     case "logout":
         include_once("ServiceProvider/Class_lib/Account_Manager.php");
         session_destroy();
-        //when the website is build this would redirect to the login screen
+        //when the website is hosted this would redirect to the login screen
         header("Location:index.php");
     break;
+    case "event_details":
+        include_once("Client/event_details.php");
+    break;
     case "tickets":
+        include_once("Client/Tickets.php");
+    break;
+    case "buy_tickets":
         include_once("Client/Ticket_Purchase_Form.html");
     break;
 }
