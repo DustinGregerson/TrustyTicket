@@ -1,8 +1,13 @@
 <?php
 
 function ConvertToImgString($data){
+    try{
     $base64String=base64_encode($data);
     return 'data:image/png;base64 ,'.$base64String;
+    }
+    catch(Exception $e){
+        return "";
+    }
 }
 function ConvertToBlob(){
     if(isset($_FILES["image"])){
@@ -10,6 +15,9 @@ function ConvertToBlob(){
        $tempPath=$file["tmp_name"];
        $binaryString=file_get_contents($tempPath);
        return $binaryString;
+    }
+    else{
+        return "unable to load picture";
     }
 
 }

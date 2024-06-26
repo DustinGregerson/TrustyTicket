@@ -3,6 +3,7 @@
 <form id="payment-form" method="POST">
     <!-- Card details fields -->
      <input type="hidden" name="api_function_call" value="buy_ticket">
+     <input type="hidden" name="ticket_id" value="<?php echo($_GET["event_id"])?>">
     <div>
         Card Information
     </div>

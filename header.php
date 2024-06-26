@@ -9,7 +9,7 @@
 </head>
 
 <!--Hub-->
-<?php if($_GET["action"]=="hub"):?>
+<?php if(isset($_GET["action"])&&$_GET["action"]=="events"):?>
     <body class="hub">
 <?php else:?>
     <body>
@@ -23,11 +23,13 @@
                 <h1>TrustyTicket</h1>
             </div>
             <ul>
-                <li><a href="?sub=add_event" class="create-event">+ Create Events</a></li>
+                <li><a href="?action=events&sub=add_event" class="create-event">+ Create Events</a></li>
                 <li><a href="?action=hub">Dashboard</a></li>
-                <li><a href="#manage-events">Manage Events</a></li>
+                <li><a href="?action=events">Manage Events</a></li>
+                <li><a href="?action=events&sub=find_events">Find Events</a></li>
                 <li><a href="?action=tickets">Tickets</a></li>
-                <li><a href="#payment">Payment</a></li>
+                <li><a href="?action=dispute">Disputes</a></li>
+                <li><a href="?action=financial">Financial</a></li>
                 <li><a href="?action=logout">Log Out</a></li>
             </ul>
             <div class="host-rating">

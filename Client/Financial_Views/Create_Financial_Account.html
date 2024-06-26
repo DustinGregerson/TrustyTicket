@@ -1,0 +1,115 @@
+
+<div>
+    By clicking i agree you agree to the terms and services of the <a href="https://stripe.com/legal/connect-account">stripe Connected Account Agreement.</a>
+</div>
+
+<form id="target" action="ServiceProvider/API.php" method="post">
+    <input type="hidden" name="api_function_call" value="create_financial_account">
+    <label>First Name</label>
+    <input type="text" name="first_name" value="dustin">
+    <label>Last Name</label>
+    <input type="text" name="last_name" value="gregerson">
+    <label>Date Of Birth</label>
+    <input type="date" name="dob" value="1990-01-01">
+    <label>Last 4 of social security</label>
+    <input type="text" name="ssn4" value="0000">
+    <div>Address</div>
+    <label>Street</label>
+    <input type="text" name="street" value="n oak">
+    <label>City</label>
+    <input type="text" name="city" value="plate">
+    <label for="state">State</label>
+    <select name="state" id="state">
+        <option value="AL">AL</option>
+        <option value="AK">AK</option>
+        <option value="AZ">AZ</option>
+        <option value="AR">AR</option>
+        <option value="CA">CA</option>
+        <option value="CO">CO</option>
+        <option value="CT">CT</option>
+        <option value="DE">DE</option>
+        <option value="FL">FL</option>
+        <option value="GA">GA</option>
+        <option value="HI">HI</option>
+        <option value="ID">ID</option>
+        <option value="IL">IL</option>
+        <option value="IN">IN</option>
+        <option value="IA">IA</option>
+        <option value="KS">KS</option>
+        <option value="KY">KY</option>
+        <option value="LA">LA</option>
+        <option value="ME">ME</option>
+        <option value="MD">MD</option>
+        <option value="MA">MA</option>
+        <option value="MI">MI</option>
+        <option value="MN">MN</option>
+        <option value="MS">MS</option>
+        <option value="MO">MO</option>
+        <option value="MT">MT</option>
+        <option value="NE">NE</option>
+        <option value="NV">NV</option>
+        <option value="NH">NH</option>
+        <option value="NJ">NJ</option>
+        <option value="NM">NM</option>
+        <option value="NY">NY</option>
+        <option value="NC">NC</option>
+        <option value="ND">ND</option>
+        <option value="OH">OH</option>
+        <option value="OK">OK</option>
+        <option value="OR">OR</option>
+        <option value="PA">PA</option>
+        <option value="RI">RI</option>
+        <option value="SC">SC</option>
+        <option value="SD">SD</option>
+        <option value="TN">TN</option>
+        <option value="TX">TX</option>
+        <option value="UT">UT</option>
+        <option value="VT">VT</option>
+        <option value="VA">VA</option>
+        <option value="WA">WA</option>
+        <option value="WV">WV</option>
+        <option value="WI">WI</option>
+        <option value="WY">WY</option>
+      </select>
+      <br>
+      <label>ZIP</label>
+      <input type="text" name="zip" value="12345">
+      <label>Phone</label>
+      <input type="text" name="phone" value="0000000000">
+    <input type="submit" value="I Agree">
+</form>
+
+<script>
+    $('#target').submit(function(event) {
+        event.preventDefault();
+        var apiCall=$("#api_function_call").val();
+        var type='POST';
+        var formData=new FormData(this);
+        var error=$("#error");
+        var data={};
+        
+        $.ajax({
+            type: type,
+            url: 'http://localhost/project/trustyticket/serviceProvider/API.php',
+            data: formData ,
+            processData: false,
+            contentType: false, 
+            dataType: 'json',
+            encode: true
+        })
+        .done(function(data) {
+            console.log(data);
+            var errorValue=false;
+            if(data==true){
+                window.location.href="http://localhost/project/trustyticket?action=financial";
+            }
+            else{
+                console.log("try again");
+            }
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+                console.error('Error:', textStatus, errorThrown);
+                console.log(data);
+        });
+    });
+</script>

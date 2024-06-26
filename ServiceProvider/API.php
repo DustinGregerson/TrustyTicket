@@ -26,10 +26,35 @@ if(isset($_POST["api_function_call"])){
             $data=$event_manager->update_event();
         break;
         case "buy_ticket":
-            include_once("Class_lib/Ticket_Manager.php");
+            include_once("Class_lib/Payment_Manager.php");
             $_POST["amount"]=5000;//test
-            $ticket_Manager= new Payment_Manager();
-            $data=$ticket_Manager->PaymentIntent();
+            $payment_manager= new Payment_Manager();
+            $data=$payment_manager->PaymentIntent();
+        break;
+        case "pay_out":
+            include_once("Class_lib/Payment_Manager.php");
+            $payment_manager= new Payment_Manager();
+            $data=$payment_manager->payOut();
+        break;
+        case "refund":
+            include_once("Class_lib/Payment_Manager.php");
+            $payment_manager= new Payment_Manager();
+            $data=$payment_manager->refund();
+        break;
+        case "create_financial_account":
+            include_once("Class_lib/Payment_Manager.php");
+            $payment_manager= new Payment_Manager();
+            $data=$payment_manager->createStripeConnectAccount();
+        break;
+        case "attach_bank_account":
+            include_once("Class_lib/Payment_Manager.php");
+            $payment_manager= new Payment_Manager();
+            $data=$payment_manager->createExternalBankAccountForStripeAccount();
+        break;
+        case "insert_dispute":
+            include_once("Class_lib/Dispute_Manager.php");
+            $dispute_manager=new Dispute_Manager();
+            $data=$dispute_manager->insertDispute();
         break;
     }
     print(json_encode($data));

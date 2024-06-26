@@ -15,7 +15,7 @@ class Rating_Manager{
     }
 
     public function isEventRated($ticket_id){
-        $query='SELECT COUNT(*) AS "count" FROM event_rating WHERE ticket_id=:ticket_id';
+        $query='SELECT COUNT(*) AS "count" FROM event_rating WHERE ticket_id=:ticket_id LIMIT 1';
         $statment=$this->conn->prepare($query);
         $statment->bindValue(":ticket_id",$ticket_id);
         $statment->execute();
@@ -24,7 +24,7 @@ class Rating_Manager{
         return $result["count"];
     }
     public function isHostRated($ticket_id){
-        $query='SELECT COUNT(*) AS "count" FROM host_rating WHERE ticket_id=:ticket_id';
+        $query='SELECT COUNT(*) AS "count" FROM host_rating WHERE ticket_id=:ticket_id LIMIT 1';
         $statment=$this->conn->prepare($query);
         $statment->bindValue(":ticket_id",$ticket_id);
         $statment->execute();

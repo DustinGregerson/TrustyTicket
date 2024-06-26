@@ -54,6 +54,34 @@ class Events_Manager{
 
         return $result;
     }
+    public function getSortedEvents(){
+        switch($_GET["sort"]){
+            case "past":
+                $query="SELECT events.event_id,events.name,events.event_start,events.event_end,events.charge,events.event_description,pictures.picture,events.average_rating 
+                FROM events
+                LEFT JOIN pictures ON pictures.event_id=events.event_id
+                WHERE event_end<now() AND events.user_id=".$_SESSION["user_id"];
+            break;
+            case "current":
+                $query="SELECT events.event_id,events.name,events.event_start,events.event_end,events.charge,events.event_description,pictures.picture,events.average_rating
+                FROM events
+                LEFT JOIN pictures ON pictures.event_id=events.event_id
+                WHERE event_start<now() AND event_end>now() AND events.user_id=".$_SESSION["user_id"];
+            break;
+            case "future":
+                $query="SELECT events.event_id,events.name,events.event_start,events.event_end,events.charge,events.event_description,pictures.picture,events.average_rating
+                FROM events
+                LEFT JOIN pictures ON pictures.event_id=events.event_id
+                WHERE event_start>now() AND events.user_id=".$_SESSION["user_id"];
+            break;
+        }
+        $statment=$this->conn->prepare($query);
+        $statment->execute();
+        $result=$statment->fetchall(PDO::FETCH_ASSOC);
+        $statment->closeCursor();
+        return $result;
+
+    }
     public function insert_event(){
         $query="INSERT INTO events(user_id,name,event_description,max_seats,event_start,event_end,charge,show_event,private_event) VALUES(:user_id,:name,:event_description,:max_seats,:event_start,:event_end,:charge,:show_event,:private_event)";
         $statment=$this->conn->prepare($query);
@@ -175,6 +203,16 @@ class Events_Manager{
                 return $e->getCode();
             }
 
+        }
+        public function getAllEventsNotCurrentUser(){
+            $query="SELECT events.event_id,events.name,events.event_start,events.event_end,events.charge,events.event_description,pictures.picture,events.average_rating FROM events
+            LEFT JOIN pictures ON pictures.event_id=events.event_id
+            WHERE user_id !=".$_SESSION["user_id"]." AND events.event_start>now()";
+            $statment=$this->conn->prepare($query);
+            $statment->execute();
+            $result=$statment->fetchall(PDO::FETCH_ASSOC);
+            $statment->closeCursor();
+            return $result;
         }
 }
 ?>

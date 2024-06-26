@@ -2,12 +2,14 @@
     include_once("ServiceProvider/Class_lib/Ticket_Manager.php");
     include_once("ServiceProvider/Class_lib/Events_Manager.php");
     include_once("ServiceProvider/Class_lib/Rating_Manager.php");
+    include_once("ServiceProvider/Class_lib/Dispute_Manager.php");
 
     $ticket_Manager = new Ticket_Manager();
     $tickets=$ticket_Manager->getUserTickets();
 
     $event_manager  = new Events_Manager();
     $rating_manager = new Rating_Manager();
+    $dispute_manager= new Dispute_Manager();
 ?>
 
 
@@ -22,7 +24,8 @@
             <th>Event Start Date</th>
             <th>Event End Date</th>
         </tr>
-    </thead>
+</thead>
+
 <?php foreach($tickets as $ticket):?>
     <?php $event=$event_manager->getRecord($ticket["event_id"])?>
     <tr>
@@ -65,9 +68,9 @@
                     $disputeWindow->add(new DateInterval("P14D"));
                 ?>
                 
-                <?php if($disputeWindow->getTimestamp()>time())://is the current time outside of the dispute window??>
+                <?php if($disputeWindow->getTimestamp()>time()&&$dispute_manager->isDisputeFiled($ticket["ticket_id"]))://is the current time outside of the dispute window??>
                     <td>
-                        <button><a>Dispute</a></button>
+                        <button><a href="?action=dispute&sub=file&ticket_id=<?php echo($ticket["ticket_id"])?>">Dispute</a></button>
                     </td>
                 <?php endif;?>
         <?php endif;?>

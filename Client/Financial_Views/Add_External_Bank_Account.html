@@ -1,0 +1,48 @@
+
+
+<form id="target" action="ServiceProvider/API.php" method="post">
+    <input type="hidden" name="api_function_call" value="attach_bank_account">
+
+    <label>Routing Number</label>
+    <input type="text" maxlength="9" minlength="9" pattern="\d+" name="routing_number" value="110000000">
+    <label>Account Number</label>
+    <input type="text" maxlength="12" minlength="12" pattern="\d+" name="account_number" value="000123456789">
+    <label>Unique Account Name</label>
+    <input type="text" name="name">
+    <input type="submit" value="submit">
+</form>
+
+<script>
+    $('#target').submit(function(event) {
+        event.preventDefault();
+        var apiCall=$("#api_function_call").val();
+        var type='POST';
+        var formData=new FormData(this);
+        var error=$("#error");
+        var data={};
+        
+        $.ajax({
+            type: type,
+            url: 'http://localhost/project/trustyticket/serviceProvider/API.php',
+            data: formData ,
+            processData: false,
+            contentType: false, 
+            dataType: 'json',
+            encode: true
+        })
+        .done(function(data) {
+            console.log(data);
+            var errorValue=false;
+            if(data==true){
+                window.location.href="http://localhost/project/trustyticket?action=financial";
+            }
+            else{
+
+            }
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+                console.error('Error:', textStatus, errorThrown);
+                console.log(data);
+        });
+    });
+</script>
