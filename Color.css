@@ -1,0 +1,421 @@
+:root{
+    --var1:#f8f9fa;
+    --var2:#e9ecef;
+    --var3:#dee2e6;
+    --var4:#ced4da;
+    --var5:#adb5bd;
+    --var6:#6c757d;
+    --var7:#495057;
+    --var8:#343a40;
+    --var9:#212529;
+}
+body{
+    color: var(--var9);
+    background-color: var(--var2);
+}
+table{
+    border: 1px solid black;
+}
+table tr{
+    border-bottom: 1px solid black;
+    width: 100%;
+}
+table tbody :last-child{
+    border-bottom: 0px;
+}
+table tr > th,td{
+    border-right: 1px solid black;
+}
+table tr :last-child{
+    border-right: 0;
+}
+.tr_double :last-child{
+	border-right: none;
+}
+.button_default{
+    border: 1px solid var(--var5);
+    border-radius: 20px;
+    background-color: var(--var3);
+    box-shadow: 1px 1px 10px 1px var(--var3);
+    color: var(--var8);
+}
+.button_default:hover{
+    border: 1px solid var(--var5);
+    border-radius: 20px;
+    background-color: var(--var4);
+    box-shadow: 1px 1px 10px 1px var(--var7);
+    color: var(--var8);
+}
+.link{
+    text-decoration: none;
+    border: 1px solid var(--var5);
+    border-radius: 20px;
+    background-color: var(--var3);
+    box-shadow: 1px 1px 10px 1px var(--var3);
+    color: var(--var8);
+}
+.link:hover{
+    border: 1px solid var(--var5);
+    border-radius: 20px;
+    background-color: var(--var4);
+    box-shadow: 1px 1px 10px 1px var(--var7);
+    color: var(--var8);
+}
+.dark{
+    border: 1px solid var(--var3);
+    background-color: var(--var4);
+    box-shadow: 1px 1px 10px 1px var(--var7);
+}
+.details_options_pane .link{
+    background-color: var(--var4);
+}
+.event_sort .link{
+    background-color: var(--var4);
+}
+.label_error_input label{
+    text-decoration: underline;
+}
+.label_error_input span{
+    color: red;
+}
+#error{
+    color: red;
+}
+.label_error_input input{
+    box-shadow: 1px 1px 1px 1px var(--var3);
+    border-radius: 10px;
+    background-color: var(--var1);
+}
+.label_input input{
+    box-shadow: 1px 1px 1px 1px var(--var3);
+    border-radius: 10px;
+    background-color: var(--var1);
+}
+.label_select select{
+    box-shadow: 1px 1px 1px 1px var(--var3);
+    border-radius: 10px;
+    background-color: var(--var1);
+}
+.label_input label{
+    text-decoration: underline;
+}
+.label_select label{
+    text-decoration: underline;
+}
+.label_text_area textarea{
+    box-shadow: 1px 1px 1px 1px var(--var3);
+    border-radius: 10px;
+    background-color: var(--var2);
+}
+.button button{
+    text-decoration: none;
+    border: 1px solid var(--var5);
+    border-radius: 20px;
+    background-color: var(--var2);
+    box-shadow: 1px 1px 10px 1px var(--var4);
+    color: var(--var8);
+}
+.button button:hover{
+    border: 1px solid var(--var5);
+    border-radius: 20px;
+    background-color: var(--var4);
+    box-shadow: 1px 1px 10px 1px var(--var7);
+    color: var(--var8);
+}
+.details_item{
+    background-color: #adb5bd;
+}
+#login_form{
+    border: 1px solid var(--var5);
+    border-radius: 20px;
+    box-shadow: 2px 2px 2px 2px var(--var3);
+}
+@media only screen and (max-width: 600px) {
+    .user{
+        border-bottom: 1px solid black;
+    }
+    .label_error_input input{
+        box-shadow: 1px 1px 1px 1px black;
+        border-radius: 10px;
+    }
+    .label_error_input label{
+        text-decoration: underline;
+    }
+    .label_error_input span{
+        color: red;
+    }
+    .link{
+        text-decoration: none;
+    }
+
+
+    #login_form{
+        border: 1px solid black;
+        border-radius: 20px;
+        box-shadow: 2px 2px 2px 2px black;
+    }
+
+    #login_form h1{
+        border-bottom: 1px solid black;
+    }
+
+    #register_form{
+        border: 1px solid black;
+        border-radius: 20px;
+        box-shadow: 2px 2px 2px 2px black;
+    }
+    #Events_Manager .event{
+        box-shadow: 1px 1px 1px 1px black;
+    }
+    #Events_Manager .event .event_picture{
+        border: 1px solid black;
+    }
+    .event_details{
+        border: 1px solid black;
+    }
+    .details_item{
+    border-bottom: 1px solid;
+    padding: 1vw;
+    }
+    .details_item :first-child{
+        border-bottom: 1px dotted;
+        
+    }
+
+    #Event_Details #Event_Details_Picture{
+        box-shadow: 1px 1px 1px 1px black;
+        border: 1px solid;
+    }
+    #Event_Details .details_item{
+        box-shadow: 1px 1px 1px 1px black;
+        border: 1px solid;
+    }
+
+    #Event_List .event{
+        border: 1px solid black;
+        margin-top: 1vh;
+    }
+    #Event_List .event .event_picture{
+        border-bottom: 1px solid black;
+    }
+
+    #Ticket_Information_For_Mobile .Ticket_Information{
+        border: 1px solid black;
+    }
+
+        /*NOTIFICATIONS*/
+    #Notifications .notification{
+        border: 1px solid black;
+    }
+
+    #Banned_Users_List table{
+        border: 1px solid black;
+    }
+    #Banned_Users_List table tr{
+        border: 1px solid black;
+    }
+    #Banned_Users_List table tr :first-child{
+        border-right: 1px solid black;
+    }
+    #Disputes_List .dispute{
+        border: 1px solid black;
+    }
+
+    #Disputes_For_Event .dispute{
+        border: 1px solid black;
+    }
+    #Ticket_Check_In table{
+        border: 1px solid black;
+    }
+    #Ticket_Check_In table tr{
+        border: 1px solid black;
+    }
+    #Ticket_Check_In table tr :first-child{
+        border-right: 1px solid black;
+    }
+}
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    .user{
+        border-bottom: none;
+    }
+    nav{
+        background-color: var(--var6);
+    }
+    .label_error_input input{
+        box-shadow: 1px 1px 1px 1px black;
+        border-radius: 10px;
+    }
+    .label_error_input label{
+        text-decoration: underline;
+    }
+    .label_error_input span{
+        color: red;
+    }
+
+    #login_form h1{
+        border-bottom: 1px solid black;
+    }
+
+    #register_form{
+        border: 1px solid black;
+        border-radius: 20px;
+        box-shadow: 2px 2px 2px 2px black;
+    }
+    #Events_Manager .event{
+        box-shadow: 1px 1px 1px 1px black;
+    }
+    #Events_Manager .event .event_picture{
+        border: 1px solid black;
+    }
+    .event_details{
+        border: 1px solid black;
+    }
+    .details_item{
+    border-bottom: 1px solid;
+    padding: 1vw;
+    }
+    .details_item :first-child{
+        border-bottom: 1px dotted;
+        
+    }
+
+    #Event_Details #Event_Details_Picture{
+        box-shadow: 1px 1px 1px 1px black;
+        border: 1px solid;
+    }
+    #Event_Details .details_item{
+        box-shadow: 1px 1px 1px 1px black;
+        border: 1px solid;
+    }
+
+    #Event_List .event{
+        border: 1px solid black;
+        margin-top: 1vh;
+    }
+    #Event_List .event .event_picture{
+        border-bottom: 1px solid black;
+    }
+
+    #Ticket_Information_For_Mobile .Ticket_Information{
+        border: 1px solid black;
+    }
+
+        /*NOTIFICATIONS*/
+    #Notifications .notification{
+        border: 1px solid black;
+    }
+
+    #Banned_Users_List table{
+        border: 1px solid black;
+    }
+    #Banned_Users_List table tr{
+        border: 1px solid black;
+    }
+    #Banned_Users_List table tr :first-child{
+        border-right: 1px solid black;
+    }
+    #Disputes_List .dispute{
+        border: 1px solid black;
+    }
+
+    #Disputes_For_Event .dispute{
+        border: 1px solid black;
+    }
+    #Ticket_Check_In table{
+        border: 1px solid black;
+    }
+    #Ticket_Check_In table tr{
+        border: 1px solid black;
+    }
+    #Ticket_Check_In table tr :first-child{
+        border-right: 1px solid black;
+    }
+}
+@media only screen and (min-width: 1025px) {
+    .user{
+        border-bottom: none;
+    }
+    nav{
+        background-color: var(--var6);
+        border-radius: 0px 20px 20px 0px;
+    }
+
+    #login_form h1{
+        border-bottom: 1px solid black;
+    }
+
+    #register_form{
+        border: 1px solid black;
+        border-radius: 20px;
+        box-shadow: 2px 2px 2px 2px black;
+    }
+    #Events_Manager .event{
+        box-shadow: 1px 1px 1px 1px black;
+    }
+    #Events_Manager .event .event_picture{
+        border: 1px solid black;
+    }
+    .event_details{
+        border: 1px solid black;
+    }
+    .details_item{
+    border-bottom: 1px solid;
+    padding: 1vw;
+    }
+    .details_item :first-child{
+        border-bottom: 1px dotted;
+        
+    }
+
+    #Event_Details #Event_Details_Picture{
+        box-shadow: 1px 1px 1px 1px black;
+        border: 1px solid;
+    }
+    #Event_Details .details_item{
+        box-shadow: 1px 1px 1px 1px black;
+        border: 1px solid;
+    }
+
+    #Event_List .event{
+        border: 1px solid black;
+        margin-top: 1vh;
+    }
+    #Event_List .event .event_picture{
+        border-bottom: 1px solid black;
+    }
+
+    #Ticket_Information_For_Mobile .Ticket_Information{
+        border: 1px solid black;
+    }
+
+        /*NOTIFICATIONS*/
+    #Notifications .notification{
+        border: 1px solid black;
+    }
+
+    #Banned_Users_List table{
+        border: 1px solid black;
+    }
+    #Banned_Users_List table tr{
+        border: 1px solid black;
+    }
+    #Banned_Users_List table tr :first-child{
+        border-right: 1px solid black;
+    }
+    #Disputes_List .dispute{
+        border: 1px solid black;
+    }
+
+    #Disputes_For_Event .dispute{
+        border: 1px solid black;
+    }
+    #Ticket_Check_In table{
+        border: 1px solid black;
+    }
+    #Ticket_Check_In table tr{
+        border: 1px solid black;
+    }
+    #Ticket_Check_In table tr :first-child{
+        border-right: 1px solid black;
+    }
+}

@@ -1,16 +1,29 @@
 
+<div id="Add_External_Bank_Account_Form">
+    <h1>Add Bank Account</h1>
+    <form id="target" action="ServiceProvider/API.php" method="post">
+        <input type="hidden" name="api_function_call" value="attach_bank_account">
 
-<form id="target" action="ServiceProvider/API.php" method="post">
-    <input type="hidden" name="api_function_call" value="attach_bank_account">
+        <div class="label_input">
+            <label>Routing Number</label>
+            <input type="text" maxlength="9" minlength="9" pattern="\d+" name="routing_number" value="110000000">
+        </div>
 
-    <label>Routing Number</label>
-    <input type="text" maxlength="9" minlength="9" pattern="\d+" name="routing_number" value="110000000">
-    <label>Account Number</label>
-    <input type="text" maxlength="12" minlength="12" pattern="\d+" name="account_number" value="000123456789">
-    <label>Unique Account Name</label>
-    <input type="text" name="name">
-    <input type="submit" value="submit">
-</form>
+        <div class="label_input">
+            <label>Account Number</label>
+            <input type="text" maxlength="12" minlength="12" pattern="\d+" name="account_number" value="000123456789">
+        </div>
+
+        <div class="label_input">
+            <label>Unique Account Name</label>
+            <input type="text" name="name">
+        </div>
+
+        <div class="button">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</div>
 
 <script>
     $('#target').submit(function(event) {
@@ -34,6 +47,7 @@
             console.log(data);
             var errorValue=false;
             if(data==true){
+                alert("Account Added");
                 window.location.href="http://localhost/project/trustyticket?action=financial";
             }
             else{

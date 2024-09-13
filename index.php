@@ -35,7 +35,18 @@ if(isset($_SESSION["username"])){
                 include("Client/Hub.php");
             }
         break;
+
+        case"ban_user":
+            include_once("Client/Account_Views/Ban_User_Form.html");
+        break;
+        case "list_banned_users":
+            include_once("Client/Account_Views/Banned_Users_List.php");
+        break;
+        case "notifications":
+            include_once("Client/Account_Views/Notifications.php");
+        break;
         //------------------Events Section---------------------------
+
         case "events":
             if(!isset($_GET["sub"])){
                 include("Client/Event_Views/Event_List_This_User.php");
@@ -45,7 +56,7 @@ if(isset($_SESSION["username"])){
                     include("Client/Event_Views/Event_List.php");
                 }
                 if($_GET["sub"]=="add_event"){
-                    include("Client/Event_Views/Event_Insert_Form.html");
+                    include("Client/Event_Views/Event_Insert_Form.php");
                 }
                 if($_GET["sub"]=="edit_event"){
                     include("Client/Event_Views/Event_Update_Form.php");
@@ -64,11 +75,15 @@ if(isset($_SESSION["username"])){
         break;
         //------------------Tickets Section----------------------------
         case "tickets":
-            include_once("Client/Ticket_Views/Tickets.php");
-        break;
-
-        case "buy_tickets":
-            include_once("Client/Ticket_Views/Ticket_Purchase_Form.html");
+            if(!isset($_GET["sub"])){
+                include_once("Client/Ticket_Views/Tickets.php");
+            }
+            else if($_GET["sub"]=="buy"){
+                include_once("Client/Ticket_Views/Ticket_Purchase_Form.php");
+            }
+            else if($_GET["sub"]=="check_in"){
+                include_once("Client/Ticket_Views/Ticket_Check_in_Form.php");
+            }
         break;
         //------------------Financial Section----------------------------
         case "financial":
@@ -93,13 +108,14 @@ if(isset($_SESSION["username"])){
             if(!isset($_GET["sub"])){
                 include_once("Client/Dispute_Views/Disputes.php");
             }
+            else if($_GET["sub"]=="file"&&isset($_GET["ticket_id"])){
+                include_once("Client/Dispute_Views/Dispute_Form.php");
+            }
+            else if($_GET["sub"]=="event_disputes"){
+                include_once("Client/Dispute_Views/Disputes_For_Event.php");
+            }
             else{
-                if($_GET["sub"]=="file"&&isset($_GET["ticket_id"])){
-                    include_once("Client/Dispute_Views/Dispute_Form.php");
-                }
-                else{
-                    include_once("Client/Ticket_Views/Tickets.php");
-                }
+                include_once("Client/Ticket_Views/Tickets.php");
             }
         break;
     }

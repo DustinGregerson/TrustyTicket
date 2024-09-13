@@ -62,10 +62,23 @@
             JOIN events ON users.user_id=events.user_id
             JOIN tickets ON tickets.event_id=events.event_id
             JOIN disputes ON tickets.ticket_id=disputes.ticket_id
-            WHERE tickets.user_id=".$_SESSION["user_id"];
+            WHERE tickets.user_id=:user_id";
             $statment=$this->conn->prepare($query);
+            $statment->bindValue(":user_id",$_SESSION["user_id"]);
             $statment->execute();
             $result=$statment->fetchAll();
+            $statment->closeCursor();
+            return $result;
+
+        }
+        public function getAllDisputesForEvent($event_id){
+            $query="SELECT * FROM disputes
+                    JOIN tickets ON disputes.ticket_id=tickets.ticket_id
+                    WHERE tickets.event_id=:event_id";
+            $statment=$this->conn->prepare($query);
+            $statment->bindValue(":event_id",$event_id);
+            $statment->execute();
+            $result=$statment->fetchAll(PDO::FETCH_ASSOC);
             $statment->closeCursor();
             return $result;
 
@@ -83,7 +96,7 @@
             $query="SELECT * FROM disputes
             JOIN tickets ON tickets.ticket_id=disputes.ticket_id
             JOIN payout ON payout.ticket_id=tickets.ticket_id
-            WHERE dispute_id=:dispute_id AND payout.to_host=null";
+            WHERE dispute_id=:dispute_id AND payout.to_host IS NULL";
             $statment=$this->conn->prepare($query);
             $statment->bindValue(":dispute_id",$dispute_id);
             $statment->execute();
@@ -98,6 +111,46 @@
             $statment->bindValue(":to_host",$_POST["to_host"]);
             $statment->bindValue(":ticket_id",$_POST["ticket_id"]);
             $statment->execute();
+        }
+        public function getDisputeFiguresForEvent($event_id){
+            $query='SELECT count(disputes.dispute_id) AS "number_of_disputes", IFNULL(sum(events.charge),0) AS "total_withheld"
+                    FROM tickets
+                    JOIN disputes ON tickets.ticket_id=disputes.ticket_id
+                    JOIN payout ON tickets.ticket_id=payout.ticket_id
+                    JOIN events ON tickets.event_id=events.event_id
+                    WHERE events.event_id=:event_id';
+            $statment=$this->conn->prepare($query);
+            $statment->bindValue(":event_id",$event_id);
+            $statment->execute();
+            $result=$statment->fetch(PDO::FETCH_DEFAULT);
+            $statment->closeCursor();
+            return $result;
+        }
+        public function getDisputesForEventSorted($event_id){
+            if($_GET["sort"]=="before"){
+                $query='SELECT bought_on,code,used,date_filed,dispute_id,reason 
+                FROM tickets
+                JOIN disputes ON tickets.ticket_id=disputes.ticket_id
+                JOIN payout ON tickets.ticket_id=payout.ticket_id
+                JOIN events ON tickets.event_id=events.event_id
+                JOIN event_dates ON tickets.event_id=event_dates.event_id
+                WHERE events.event_id=:event_id AND disputes.date_filed<event_dates.start_relative_to_central_time';
+            }
+            else if($_GET["sort"]=="after"){
+                $query='SELECT bought_on,code,used,date_filed,dispute_id,reason
+                FROM tickets
+                JOIN disputes ON tickets.ticket_id=disputes.ticket_id
+                JOIN payout ON tickets.ticket_id=payout.ticket_id
+                JOIN events ON tickets.event_id=events.event_id
+                JOIN event_dates ON tickets.event_id=event_dates.event_id
+                WHERE events.event_id=:event_id AND disputes.date_filed>event_dates.start_relative_to_central_time';
+            }
+            $statment=$this->conn->prepare($query);
+            $statment->bindValue(":event_id",$event_id);
+            $statment->execute();
+            $result=$statment->fetchAll(PDO::FETCH_ASSOC);
+            $statment->closeCursor();
+            return $result;    
         }
     }
 ?>

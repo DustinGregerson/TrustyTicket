@@ -1,23 +1,27 @@
 
 
-    <main>
-        <div class="container">
-            <div class="left">
-                <h1>Sign in</h1>
-                <p>Welcome to TrustyTicket</p>
-                <form id="target" action="">
-                    <span id="error"></span>
-                    <input id="api_function_call" type="hidden" name="api_function_call" value="login">
-                    <input id="username" type="text" placeholder="Your username" name="username" required>
-                    <input id="password" type="password" placeholder="Your password" name="password" required>
-                    <button type="submit">Next</button>
-                </form>
-                <p>Don't have an account yet? <a href="?action=register">Sign up</a></p>
-            </div>
-            <div class="right"></div>
-        </div>
-    </main>
 
+<div id="login_form">
+    <h1>Sign in</h1>
+    <form id="target">
+        <span id="error"></span>
+        <input id="api_function_call" type="hidden" name="api_function_call" value="login">
+        
+        <div class="label_input">
+            <label>User Name</label>
+            <input id="username" type="text" placeholder="Your username" name="username" required>
+        </div>
+
+        <div class="label_input">
+            <label>Password</label>
+            <input id="password" type="password" placeholder="Your password" name="password" required>
+        </div>
+        <div class="button">
+            <button type="submit">Next</button>
+        </div>
+    </form>
+    <div class="text_content">Don't have an account yet? <a class="link" href="?action=register">Sign up</a></div>
+</div>
 <script>
 
     $('#target').submit(function(event) {
@@ -36,12 +40,10 @@
         })
         .done(function(data) {
             console.log(data);
-            var errorValue=false;
-            if(data['invalid_login']){
-                error.html(data['invalid_login']);
-                errorValue=true;
+            if(data["invalid_login"]){
+                error.html(data["invalid_login"]);
             }
-            if(!errorValue){
+            else{
                 window.location.href="http://localhost/project/trustyticket";
             }
     

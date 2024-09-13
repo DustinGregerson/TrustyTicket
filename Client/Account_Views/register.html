@@ -1,89 +1,102 @@
 
-    <main>
-        <div class="container">
-            <div class="left">
-                <h1>Create a free <br>
-                    account to start <br>
-                    hosting an event 
-                </h1>
-                <form id="target" method="post">
-                    <input type="hidden" name="api_function_call" value="register">
 
-                    <span id="username_error"></span>
-                    <input type="text" placeholder="Your user name" required name="username">
+<div id="register_form">
+    <h1>Create a free account</h1>
+        <form id="target" method="post">
+            <input type="hidden" name="api_function_call" value="register">
 
-                    <span id="password_error"></span>
-                    <input type="password" placeholder="Your password" required name="password">
-
-                    <span id="email_error"></span>
-                    <input type="email" placeholder="Your email address" required name="email">
-
-                    <input type="text" placeholder="Your First Name" required name="first_name">
-
-                    <input type="text" placeholder="Your Last Name" required name="last_name">
-
-                    <label for="state">State</label>
-                    <select name="state" id="state">
-                        <option value="AL">AL</option>
-                        <option value="AK">AK</option>
-                        <option value="AZ">AZ</option>
-                        <option value="AR">AR</option>
-                        <option value="CA">CA</option>
-                        <option value="CO">CO</option>
-                        <option value="CT">CT</option>
-                        <option value="DE">DE</option>
-                        <option value="FL">FL</option>
-                        <option value="GA">GA</option>
-                        <option value="HI">HI</option>
-                        <option value="ID">ID</option>
-                        <option value="IL">IL</option>
-                        <option value="IN">IN</option>
-                        <option value="IA">IA</option>
-                        <option value="KS">KS</option>
-                        <option value="KY">KY</option>
-                        <option value="LA">LA</option>
-                        <option value="ME">ME</option>
-                        <option value="MD">MD</option>
-                        <option value="MA">MA</option>
-                        <option value="MI">MI</option>
-                        <option value="MN">MN</option>
-                        <option value="MS">MS</option>
-                        <option value="MO">MO</option>
-                        <option value="MT">MT</option>
-                        <option value="NE">NE</option>
-                        <option value="NV">NV</option>
-                        <option value="NH">NH</option>
-                        <option value="NJ">NJ</option>
-                        <option value="NM">NM</option>
-                        <option value="NY">NY</option>
-                        <option value="NC">NC</option>
-                        <option value="ND">ND</option>
-                        <option value="OH">OH</option>
-                        <option value="OK">OK</option>
-                        <option value="OR">OR</option>
-                        <option value="PA">PA</option>
-                        <option value="RI">RI</option>
-                        <option value="SC">SC</option>
-                        <option value="SD">SD</option>
-                        <option value="TN">TN</option>
-                        <option value="TX">TX</option>
-                        <option value="UT">UT</option>
-                        <option value="VT">VT</option>
-                        <option value="VA">VA</option>
-                        <option value="WA">WA</option>
-                        <option value="WV">WV</option>
-                        <option value="WI">WI</option>
-                        <option value="WY">WY</option>
-                      </select>
-                    <br>
-
-                    <button type="submit">Next</button>
-                </form>
-                <p>Already have an account? <a href="?action=login">Sign in</a></p>
+            <div class="label_error_input">
+                <label>User Name*</label>
+                <span id="username_error"></span>
+                <input type="text" placeholder="Your user name" required name="username">
             </div>
-            <div class="right"></div>
-        </div>
-    </main>
+
+            <div class="label_error_input">
+                <label>Password*</label>
+                <span id="password_error"></span>
+                <input type="password" placeholder="Your password" required name="password">
+            </div>
+
+            <div class="label_error_input">
+                <label>Email*</label>
+                <span id="email_error"></span>
+                <input type="email" placeholder="Your email address" required name="email">
+            </div>
+
+            <div class="label_input">
+                <label>First Name*</label>
+                <input type="text" placeholder="Your First Name" required name="first_name">
+            </div>
+
+
+            <div class="label_input">
+                <label>Last Name*</label>
+                <input type="text" placeholder="Your Last Name" required name="last_name">
+            </div>
+
+            <div class="label_select">
+            <label for="state">State</label>
+            <select name="state" id="state">
+                <option value="AL">AL</option>
+                <option value="AK">AK</option>
+                <option value="AZ">AZ</option>
+                <option value="AR">AR</option>
+                <option value="CA">CA</option>
+                <option value="CO">CO</option>
+                <option value="CT">CT</option>
+                <option value="DE">DE</option>
+                <option value="FL">FL</option>
+                <option value="GA">GA</option>
+                <option value="HI">HI</option>
+                <option value="ID">ID</option>
+                <option value="IL">IL</option>
+                <option value="IN">IN</option>
+                <option value="IA">IA</option>
+                <option value="KS">KS</option>
+                <option value="KY">KY</option>
+                <option value="LA">LA</option>
+                <option value="ME">ME</option>
+                <option value="MD">MD</option>
+                <option value="MA">MA</option>
+                <option value="MI">MI</option>
+                <option value="MN">MN</option>
+                <option value="MS">MS</option>
+                <option value="MO">MO</option>
+                <option value="MT">MT</option>
+                <option value="NE">NE</option>
+                <option value="NV">NV</option>
+                <option value="NH">NH</option>
+                <option value="NJ">NJ</option>
+                <option value="NM">NM</option>
+                <option value="NY">NY</option>
+                <option value="NC">NC</option>
+                <option value="ND">ND</option>
+                <option value="OH">OH</option>
+                <option value="OK">OK</option>
+                <option value="OR">OR</option>
+                <option value="PA">PA</option>
+                <option value="RI">RI</option>
+                <option value="SC">SC</option>
+                <option value="SD">SD</option>
+                <option value="TN">TN</option>
+                <option value="TX">TX</option>
+                <option value="UT">UT</option>
+                <option value="VT">VT</option>
+                <option value="VA">VA</option>
+                <option value="WA">WA</option>
+                <option value="WV">WV</option>
+                <option value="WI">WI</option>
+                <option value="WY">WY</option>
+                </select>
+            </div>
+
+            <div class="button">
+                <button type="submit">Next</button>
+            </div>
+        </form>
+        <div class="text_content">Already have an account? <a class="link" href="?action=login">Sign in</a></div>
+    </div>
+
 
     <script>
         $('#target').submit(function(event) {
@@ -110,35 +123,35 @@
             console.log(data);
             var error=false;
             if(data['username_length']){
-               usernameError.html(usernameError.html()+data['username_length']+"<br>");
+               usernameError.html(usernameError.html()+"<span>"+data['username_length']+"</span>");
                error=true;
             }
             if(data['username_exists']){
-                usernameError.html(usernameError.html()+data['username_exists']+"<br>");
+                usernameError.html(usernameError.html()+"<span>"+data['username_exists']+"</span>");
                 error=true;
             }
             if(data['password_length']){
-                passwordError.html(passwordError.html()+data['password_length']+"<br>");
+                passwordError.html(passwordError.html()+"<span>"+data['password_length']+"</span>");
                 error=true;
             }
             if(data['password_cap_letter']){
-                passwordError.html(passwordError.html()+data['password_cap_letter']+"<br>");
+                passwordError.html(passwordError.html()+"<span>"+data['password_cap_letter']+"</span>");
                 error=true;
             }
             if(data['password_number']){
-                passwordError.html(passwordError.html()+data['password_number']+"<br>");
+                passwordError.html(passwordError.html()+"<span>"+data['password_number']+"</span>");
                 error=true;
             }
             if(data['password_special_char']){
-                passwordError.html(passwordError.html()+data['password_special_char']+"<br>");
+                passwordError.html(passwordError.html()+"<span>"+data['password_special_char']+"</span>");
                 error=true;
             }
             if(data['email_invalid']){
-                emailError.html(data['email_invalid']);
+                emailError.html("<span>"+data['email_invalid']+"</span>");
                 error=true;
             }
             if(data['email_exists']){
-                emailError.html(data['email_exists']);
+                emailError.html("<span>"+data['email_exists']+"</span>");
                 error=true;
             }
 

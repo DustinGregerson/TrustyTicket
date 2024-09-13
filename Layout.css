@@ -1,0 +1,1196 @@
+
+.desktop{
+    display: none;
+}
+.mobile{
+    display: none;
+}
+.tablet_and_desktop{
+    display: none;
+}
+@media only screen and (max-width: 600px) {
+    body, #Login_Or_Register{
+        font-family: "Gill Sans", sans-serif;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .tablet_and_desktop{
+        display: none;
+    }
+    .mobile{
+        display: block;
+        width: 100%;
+    }
+    nav{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        font-size: 7vw;
+        height: 5vh;
+        position:sticky;
+    }
+    nav h1{
+        align-self: left;
+        width: 100%;
+    }
+    nav ul{
+        visibility: hidden;
+    }
+    nav ul li{
+        margin-top: 3vh;
+        font-size: 7vw;
+    }
+
+    nav:hover > ul{
+        background-color: gray;
+        visibility: visible;
+        z-index: 2;
+        width: 100%;
+    }
+    .user{
+        width: 100%;
+        align-self: left;
+        margin-bottom: 1vw;
+        font-size: 8vw;
+    }
+    .text_content{
+        width: 80%;
+        text-align: center;
+    }
+    .Yes_No_Radio{
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        width: 80%;
+    }
+
+    .label_input{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .label_input input{
+        width: 80%;
+    }
+    .label_input label{
+        align-self: left;
+        width: 80%;
+    }
+    .label_text_area{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .label_text_area label{
+        width: 80%;
+    }
+    .label_text_area textarea{
+        width: 80%;
+        align-self: left;
+        height: 10vh;
+    }
+
+    .label_error_input{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .label_error_input input{
+        width: 80%;
+    }
+    .label_error_input label{
+        align-self: left;
+        width: 80%;
+    }
+    .label_error_input span{
+        display: flex;
+        flex-direction: column;
+        align-self: left;
+        width: 80%;
+    }
+    .label_select{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+    }
+    .label_select select{
+        width: 80%;
+    }
+
+    .label_img_input{
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+    }
+    .label_img_input div{
+        height: 20vh;
+        overflow: hidden;
+    }
+    .label_img_input div img{
+        width: 100%;
+        object-fit: fill;
+    }
+
+
+    .button{
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        width: 100%;
+    }
+
+
+    /* LOGIN SECTION */
+    #login_form{
+        display: flex;
+        height: max-content;
+        flex-direction: column;
+        width: 90%;
+    }
+    #login_form h1{
+        text-align: center;
+    }
+    /* REGISTER SECTION */
+    #register_form{
+        display: flex;
+        height: max-content;
+        flex-direction: column;
+        width: 90%;
+    }
+    #register_form h1{
+        text-align: center;
+    }
+    /* HUB SECTION */
+
+
+    /*EVENTS SECTION */
+
+        /* CREATE/UPDATE FORMS */
+        #Create_Update_Event{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+        #Create_Update_Event h1{
+            text-align: center;
+        }
+        /*EVENT_MANAGER*/
+        #Events_Manager{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+        .event{
+            display: flex;
+            flex-direction: column;
+        }
+        .event .event_picture{
+            height: 30vh;
+        }
+        .event .event_picture img{
+            height:100%;
+            width: 100%;
+            object-fit: fill;
+        }
+        .event .event_details{
+            display: flex;
+            flex-direction: column;
+        }
+        .event .event_details .details_item{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+        }
+        .event .event_details .details_item div{
+            width:100%;
+            
+        }
+        #details_item_description{
+            position: absolute;
+            visibility: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        /*EVENT_DETAILS*/
+        #Event_Details{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+        #Event_Details #Event_Details_Picture{
+            display: flex;
+            flex-direction: column;
+            height: 35vh;
+        }
+        #Event_Details #Event_Details_Picture img{
+            flex-grow: 2;
+            width: 100%;
+        }
+        /*EVENT_LISTS */
+        #Event_List{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+        /*TICKETS_LISTS */ 
+        #Ticket_List{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+        #Ticket_Information_Tablet_Or_Desktop{
+            visibility: hidden;
+            position: absolute;
+        }
+        #Ticket_Check_In{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        /*NOTIFICATIONS*/ 
+        #Notifications{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+        #Ban_User_Form{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #Banned_Users_List{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #Banned_Users_List table tr :last-child{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #Disputes_List{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #Dispute_Form{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #Disputes_For_Event{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #Finacial_Account{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #Finacial_Account_Form{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #Add_External_Bank_Account_Form{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+}
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    .mobile{
+        display: none;
+        width: auto;
+    }
+    .tablet{
+        display: block;
+        width: auto;
+    }
+    .tablet_and_desktop{
+        display: block;
+        width: auto;
+    }
+    body{
+        font-family: "Gill Sans", sans-serif;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+    }
+    #Login_Or_Register{
+        font-family: "Gill Sans", sans-serif;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #Nav_Ribbon{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        width: 20vw;
+        position: fixed;
+        left: 0;
+    }
+    nav{
+        height: 100vh;
+    }
+    nav h1{
+        align-self: left;
+    }
+    nav ul{
+        width: 20vw;
+        display: flex;
+        flex-direction: column;
+    }
+    nav ul li{
+        text-align: center;
+        width: 100%;
+    }
+    nav ul li a{
+        width: 100%;
+    }
+    .mobile{
+        display: none;
+    }
+    .user{
+        width: 100%;
+        align-self: left;
+        margin-bottom: 1vw;
+        font-size: 8vw;
+    }
+    .text_content{
+        width: 80%;
+        text-align: center;
+    }
+    .Yes_No_Radio{
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        width: 80%;
+    }
+
+    .label_input{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .label_input input{
+        width: 80%;
+    }
+    .label_input label{
+        align-self: left;
+        width: 80%;
+    }
+    .label_text_area{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .label_text_area label{
+        width: 80%;
+    }
+    .label_text_area textarea{
+        width: 80%;
+        align-self: left;
+        height: 10vh;
+    }
+
+    .label_error_input{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .label_error_input input{
+        width: 80%;
+    }
+    .label_error_input label{
+        align-self: left;
+        width: 80%;
+    }
+    .label_error_input span{
+        display: flex;
+        flex-direction: column;
+        align-self: left;
+        width: 80%;
+    }
+    .label_select{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+    }
+    .label_select select{
+        width: 80%;
+    }
+
+    .label_img_input{
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+    }
+    .label_img_input div{
+        height: 20vh;
+        overflow: hidden;
+    }
+    .label_img_input div img{
+        width: 100%;
+        object-fit: fill;
+    }
+
+
+    .button{
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        width: 100%;
+    }
+
+
+    /* LOGIN SECTION */
+    #login_form{
+        display: flex;
+        height: max-content;
+        flex-direction: column;
+        width: 90%;
+    }
+    #login_form h1{
+        text-align: center;
+    }
+    /* REGISTER SECTION */
+    #register_form{
+        display: flex;
+        height: max-content;
+        flex-direction: column;
+        width: 90%;
+    }
+    #register_form h1{
+        text-align: center;
+    }
+    /* HUB SECTION */
+    #Hub{
+        display: flex;
+        width: 80vw;
+        height: 100vh;
+    }
+
+    /*EVENTS SECTION */
+
+        /* CREATE/UPDATE FORMS */
+        #Create_Update_Event{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+        #Create_Update_Event h1{
+            text-align: center;
+        }
+        /*EVENT_MANAGER*/
+        #Events_Manager{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+        .event{
+            display: flex;
+            flex-direction: column;
+        }
+        .event .event_picture{
+            height: 30vh;
+        }
+        .event .event_picture img{
+            height:100%;
+            width: 100%;
+            object-fit: fill;
+        }
+        .event .event_details{
+            display: flex;
+            flex-direction: column;
+        }
+        .event .event_details .details_item{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+        }
+        .event .event_details .details_item div{
+            width:100%;
+            
+        }
+        #details_item_description{
+            position: absolute;
+            visibility: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        /*EVENT_DETAILS*/
+        #Event_Details{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+        #Event_Details #Event_Details_Picture{
+            display: flex;
+            flex-direction: column;
+            height: 35vh;
+        }
+        #Event_Details #Event_Details_Picture img{
+            flex-grow: 2;
+            width: 100%;
+        }
+        /*EVENT_LISTS */
+        #Event_List{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+        #Event_List .event{
+            display: flex;
+            flex-direction: column;
+        }
+        #Event_List .event h1{
+            width: 100%;
+            text-align: center;
+        }
+        #Event_List .event .event_picture_and_details{
+            display: flex;
+            flex-direction: row;
+        }
+        #Event_List .event .event_picture_and_details .event_details{
+            width: 50%;
+            justify-content: start;
+            height: 100%;
+        }
+        #Event_List .event .event_picture_and_details .event_picture{
+            width: 50%;
+            height: auto;
+        }
+        /*TICKETS_LISTS */ 
+        #Ticket_List{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+        #Ticket_Information_Tablet_Or_Desktop{
+            visibility: hidden;
+            position: absolute;
+        }
+        #Ticket_Check_In{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        .ticket_sort{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        .ticket_sort .link{
+            display: flex;
+            flex-direction: row;
+            width: 28%;
+            text-align: center;
+        }
+        /*NOTIFICATIONS*/ 
+        #Notifications{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+        #Ban_User_Form{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #Banned_Users_List{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #Banned_Users_List table tr :last-child{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #Disputes_List{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #Dispute_Form{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #Disputes_For_Event{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #Finacial_Account{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        
+        #Finacial_Account_Form{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #Add_External_Bank_Account_Form{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+}
+@media only screen and (min-width: 1025px) {
+    .mobile{
+        display: none;
+        width: auto;
+    }
+    .tablet{
+        display: none;
+        width: auto;
+    }
+    .tablet_and_desktop{
+        display: block;
+        width: auto;
+    }
+    .desktop{
+        display: block;
+        width: auto;
+    }
+    body{
+        font-family: "Gill Sans", sans-serif;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+    }
+    #Hub{
+        display: flex;
+        flex-direction: column;
+    }
+    #Login_Or_Register{
+        font-family: "Gill Sans", sans-serif;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #Nav_Ribbon{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        width: 20vw;
+        position: fixed;
+        left: 0;
+    }
+    nav{
+        height: 100vh;
+    }
+    nav h1{
+        align-self: left;
+    }
+    nav ul{
+        width: 20vw;
+        display: flex;
+        flex-direction: column;
+    }
+    nav ul li{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+    }
+    nav ul li .link{
+        width: 80%;
+    }
+
+    .mobile{
+        display: none;
+    }
+    .user{
+        width: 100%;
+        align-self: left;
+        margin-bottom: 1vw;
+        font-size: 8vw;
+    }
+    .text_content{
+        width: 80%;
+        text-align: center;
+    }
+    .Yes_No_Radio{
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        width: 80%;
+    }
+
+    .label_input{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .label_input input{
+        width: 80%;
+    }
+    .label_input label{
+        align-self: left;
+        width: 80%;
+    }
+    .label_text_area{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .label_text_area label{
+        width: 80%;
+    }
+    .label_text_area textarea{
+        width: 80%;
+        align-self: left;
+        height: 10vh;
+    }
+
+    .label_error_input{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .label_error_input input{
+        width: 80%;
+    }
+    .label_error_input label{
+        align-self: left;
+        width: 80%;
+    }
+    .label_error_input span{
+        display: flex;
+        flex-direction: column;
+        align-self: left;
+        width: 80%;
+    }
+    .label_select{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+    }
+    .label_select select{
+        width: 80%;
+    }
+
+    .label_img_input{
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+    }
+    .label_img_input div{
+        height: 20vh;
+        overflow: hidden;
+    }
+    .label_img_input div img{
+        width: 100%;
+        object-fit: fill;
+    }
+
+
+    .button{
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        width: 100%;
+    }
+
+
+    /* LOGIN SECTION */
+    #login_form{
+        display: flex;
+        height: max-content;
+        flex-direction: column;
+        width: 90%;
+    }
+    #login_form h1{
+        text-align: center;
+    }
+    /* REGISTER SECTION */
+    #register_form{
+        display: flex;
+        height: max-content;
+        flex-direction: column;
+        width: 90%;
+    }
+    #register_form h1{
+        text-align: center;
+    }
+    /* HUB SECTION */
+    #Hub{
+        display: flex;
+        width: 80vw;
+        height: 100vh;
+    }
+
+    /*EVENTS SECTION */
+
+        /* CREATE/UPDATE FORMS */
+        #Create_Update_Event{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+        #Create_Update_Event h1{
+            text-align: center;
+        }
+        /*EVENT_MANAGER*/
+        #Events_Manager{
+            height: fit-content;
+            width: 80vw;
+            display: flex;
+            flex-direction: column;
+        }
+        #details_item_description{
+            position: absolute;
+            visibility: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        /*EVENT_CLASSES*/
+        .event{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .event h1{
+            width: 100%;
+            text-align: center;
+        }
+        .event .event_picture_and_details{
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: 20vw;
+        }
+        .event .event_picture_and_details .event_details_split_double{
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            flex-grow: 1;
+        }
+        .details_item{
+            width: 50%;
+        }
+        .event .event_picture_and_details .event_details{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .event .event_picture_and_details .event_picture{
+            width: 30vw;
+            height: 20vw;
+            height: auto;
+        }
+        .event .event_picture_and_details .event_picture img{
+            width: 100%;
+            height: 100%;
+        }
+        .details_options_pane{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        .details_options_pane .link{
+            width: 25%;
+        }
+        .event_sort{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        .event_sort .link{
+            width: 28%;
+            text-align: center;
+        }
+
+
+        /*EVENT_DETAILS*/
+        #Event_Details{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+        #Event_Details .event{
+            height: auto;
+        }
+        #Event_Details .event_picture_and_details{
+            height: auto;
+        }
+        #Event_Details .event_picture_and_details  #Event_Details_Picture{
+            width: 50%;
+        }
+        #Event_Details .event_picture_and_details  #Event_Details_Picture img{
+            width: 100%;
+            height: 100%;
+            object-fit:fill;
+        }
+        #Event_Details .event_picture_and_details #event_details{
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            height: auto;
+        }
+        #Event_Details .event_picture_and_details #event_details .event_details_split_double{
+            flex-grow: 1;
+        }
+        #Event_Details .event_picture_and_details .event_details_single{
+            width: 100%;
+        }
+        #Event_Details .event .details_item{
+            width: 100%;
+        }
+        #Event_Details .tablet_and_desktop{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        #Event_Details .tablet_and_desktop table{
+            margin-bottom: 1vh;
+        }
+        #Event_Details .tablet_and_desktop a{
+            padding: 1vh;
+            font-size: 1.5vw;
+            text-align: center;
+            margin-left: 5%;
+            width: 90%;
+        }
+        /*EVENT_LISTS */
+        #Event_List{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            margin-left: 20vw;
+        }
+
+        /*TICKETS_LISTS */ 
+        #Ticket_List{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+        #Ticket_Information_Tablet_Or_Desktop{
+            visibility: hidden;
+            position: absolute;
+        }
+        #Ticket_Check_In{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        .ticket_sort{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        .ticket_sort .link{
+            display: flex;
+            flex-direction: row;
+            width: 28%;
+            text-align: center;
+        }
+        /*NOTIFICATIONS*/ 
+        #Notifications{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+        #Ban_User_Form{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #Ban_User_Form h1{
+            width: 100%;
+            text-align: center;
+        }
+        #Ban_User_Form #message{
+            width: 90%;
+            margin-left: 5vw;
+            text-align: center;
+        }
+        #Banned_Users_List{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #Banned_Users_List .button_default{
+            width: 70%;
+            padding: 1vh;
+        }
+        #Banned_Users_List table tr :last-child{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #Disputes_List{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #Dispute_Form{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #Disputes_For_Event{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #Disputes_For_Event .tablet_and_desktop h1{
+            text-align: center;
+            font-size: 2vw;
+        }
+        #Disputes_For_Event .tablet_and_desktop th{
+            width: 20%;
+        }
+
+        #Disputes_For_Event #dispute_options{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 90%;
+            margin-left: 5%;
+        }
+        #Disputes_For_Event #dispute_options a{
+            width: 40%;
+            text-align: center;
+            padding: 1.5vh;
+
+        }
+        #Finacial_Account{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        
+        #Finacial_Account_Form{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #Add_External_Bank_Account_Form{
+            height: fit-content;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+}
+
+
+

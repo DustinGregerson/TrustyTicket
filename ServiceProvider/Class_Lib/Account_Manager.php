@@ -139,10 +139,10 @@ public $error=[];
         $result=$statment->fetch(PDO::FETCH_ASSOC);
         $statment->closeCursor();
         if(strlen($userName)<6){
-            $this->addToErrorArray("username_length","Your username must be greater than 5 characters");
+            $this->addToErrorArray("username_length","Your username must be greater than 5 characters.");
         }
         if($result){
-            $this->addToErrorArray("username_exists","That username already exists. Please choose a diffrent username");
+            $this->addToErrorArray("username_exists","This username already exists. Please choose a different username.");
         }
         else{
             return false;
@@ -153,6 +153,80 @@ public $error=[];
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $this->addToErrorArray("email_invalid","Please enter a valid email");
         }
+    }
+
+    public function banUser(){
+        $query="SELECT * FROM users WHERE username=:username";
+        $statment=$this->conn->prepare($query);
+        $statment->bindValue(":username",$_POST["username"]);
+        $statment->execute();
+        $result=$statment->fetch(PDO::FETCH_ASSOC);
+        $statment->closeCursor();
+        $ban_id=null;
+        if($result){
+            $ban_id=$result["user_id"];
+            $query="SELECT * FROM ban_user_table WHERE host_id=:user_id AND banned_user_id=:ban_id";
+            $statment=$this->conn->prepare($query);
+            $statment->bindValue(":user_id",$_SESSION["user_id"]);
+            $statment->bindValue(":ban_id",$result["user_id"]);
+            $statment->execute();
+            $result=$statment->fetch(PDO::FETCH_ASSOC);
+            $statment->closeCursor();
+            if($result){
+                $this->addToErrorArray("user_is_banned","You have already banned this user.");
+                $statment=$this->conn->prepare($query);
+                $statment->execute();
+                return $this->error;
+            }
+            else{
+                $query="INSERT INTO ban_user_table(host_id,banned_user_id) VALUES(:user_id,:ban_id)";
+                $statment=$this->conn->prepare($query);
+                $statment->bindValue(":user_id",$_SESSION["user_id"]);
+                $statment->bindValue(":ban_id",$ban_id);
+                $statment->execute();
+                return true;
+            }
+        }
+        else{
+            $this->addToErrorArray("user_does_not_exist","This user was not found.");
+            return $this->error;
+        }
+    }
+    //This will need to be changed to the user name and not the user_id this is a not secure
+    public function unbanUser(){
+        $query="DELETE ban_user_table
+        FROM ban_user_table
+        JOIN users ON users.user_id = ban_user_table.banned_user_id
+        WHERE ban_user_table.host_id = :user_id AND users.username = :banned_user_name";
+        $statment=$this->conn->prepare($query);
+        $statment->bindValue(":user_id",$_SESSION["user_id"]);
+        $statment->bindValue(":banned_user_name",$_POST["banned_user_name"]);
+        $statment->execute();
+        if($statment->rowCount()){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+    public function getBannedUsers(){
+        $query="SELECT * FROM ban_user_table
+                JOIN users ON users.user_id=ban_user_table.banned_user_id
+                WHERE ban_user_table.host_id=:user_id";
+        $statment=$this->conn->prepare($query);
+        $statment->bindValue(":user_id",$_SESSION["user_id"]);
+        $statment->execute();
+        $result=$statment->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function getNotifications(){
+        $query="SELECT message FROM notifications WHERE user_id=:user_id";
+        $statment=$this->conn->prepare($query);
+        $statment->bindValue(":user_id",$_SESSION["user_id"]);
+        $statment->execute();
+        $result=$statment->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
     private function addToErrorArray($errorName,$errorMessage){
         $this->error[$errorName]=$errorMessage;

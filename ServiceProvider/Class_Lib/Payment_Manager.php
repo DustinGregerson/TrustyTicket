@@ -19,8 +19,9 @@ class Payment_Manager{
     }
 
     function hasStripeConnectAccount(){
-        $query='SELECT COUNT(*) AS "count" FROM stripe_accounts WHERE user_id='.$_SESSION["user_id"];
+        $query='SELECT COUNT(*) AS "count" FROM stripe_accounts WHERE user_id=:user_id';
         $statment=$this->conn->prepare($query);
+        $statment->bindValue(":user_id",$_SESSION["user_id"]);
         $statment->execute();
         $result=$statment->fetch(PDO::FETCH_DEFAULT);
         $statment->closeCursor();
@@ -29,16 +30,18 @@ class Payment_Manager{
     function hasExternalBankAccountForStripeAccount(){
         $query='SELECT COUNT(*) AS "count"  FROM stripe_accounts 
         JOIN stripe_external_bank_accounts on stripe_accounts.stripe_account_id=stripe_external_bank_accounts.stripe_account_id
-        WHERE user_id='.$_SESSION["user_id"];
+        WHERE user_id=:user_id';
         $statment=$this->conn->prepare($query);
+        $statment->bindValue(":user_id",$_SESSION["user_id"]);
         $statment->execute();
         $result=$statment->fetch(PDO::FETCH_DEFAULT);
         $statment->closeCursor();
         return $result["count"];
     }
     function hasPayout(){
-       $query='SELECT COUNT(*) as "count" FROM payout WHERE host_id='.$_SESSION["user_id"].' AND payed_out_on IS NULL AND to_host=1 LIMIT 1';
+       $query='SELECT COUNT(*) as "count" FROM payout WHERE host_id=:user_id AND payed_out_on IS NULL AND to_host=1 LIMIT 1';
        $statment=$this->conn->prepare($query);
+       $statment->bindValue(":user_id",$_SESSION["user_id"]);
        $statment->execute();
        $result=$statment->fetch(PDO::FETCH_DEFAULT);
        $statment->closeCursor();
@@ -48,8 +51,9 @@ class Payment_Manager{
         $query='SELECT SUM(events.charge) AS "total" from payout
         JOIN tickets on tickets.ticket_id=payout.ticket_id
         JOIN events on events.event_id=tickets.event_id
-        WHERE host_id='.$_SESSION["user_id"].' AND payed_out_on IS NULL AND to_host=1';
+        WHERE host_id=:user_id AND payed_out_on IS NULL AND to_host=1';
         $statment=$this->conn->prepare($query);
+        $statment->bindValue(":user_id",$_SESSION["user_id"]);
         $statment->execute();
         $result=$statment->fetch(PDO::FETCH_DEFAULT);
         $statment->closeCursor();
@@ -59,8 +63,9 @@ class Payment_Manager{
         $query='SELECT SUM(events.charge) AS "total" from payout
         JOIN tickets on tickets.ticket_id=payout.ticket_id
         JOIN events on events.event_id=tickets.event_id
-        WHERE attendant_id='.$_SESSION["user_id"].' AND payed_out_on IS NULL AND to_host=0';
+        WHERE attendant_id=:user_id AND payed_out_on IS NULL AND to_host=0';
         $statment=$this->conn->prepare($query);
+        $statment->bindValue(":user_id",$_SESSION["user_id"]);
         $statment->execute();
         $result=$statment->fetch(PDO::FETCH_DEFAULT);
         $statment->closeCursor();
@@ -68,8 +73,9 @@ class Payment_Manager{
     }
 
     function hasRefund(){
-        $query='SELECT COUNT(*) as "count" FROM payout WHERE attendant_id='.$_SESSION["user_id"].' AND payed_out_on IS NULL AND to_host=0 LIMIT 1';
+        $query='SELECT COUNT(*) as "count" FROM payout WHERE attendant_id=:user_id AND payed_out_on IS NULL AND to_host=0 LIMIT 1';
         $statment=$this->conn->prepare($query);
+        $statment->bindValue(":user_id",$_SESSION["user_id"]);
         $statment->execute();
         $result=$statment->fetch(PDO::FETCH_DEFAULT);
         $statment->closeCursor();
@@ -78,8 +84,9 @@ class Payment_Manager{
     function getAccountNames(){
         $query='SELECT name FROM stripe_accounts 
         JOIN stripe_external_bank_accounts on stripe_accounts.stripe_account_id=stripe_external_bank_accounts.stripe_account_id
-        WHERE user_id='.$_SESSION["user_id"];
+        WHERE user_id=:user_id';
         $statment=$this->conn->prepare($query);
+        $statment->bindValue(":user_id",$_SESSION["user_id"]);
         $statment->execute();
         $result=$statment->fetchall(PDO::FETCH_ASSOC);
         $statment->closeCursor();
@@ -88,8 +95,9 @@ class Payment_Manager{
     function getAccounts(){
         $query='SELECT * FROM stripe_accounts 
         JOIN stripe_external_bank_accounts on stripe_accounts.stripe_account_id=stripe_external_bank_accounts.stripe_account_id
-        WHERE user_id='.$_SESSION["user_id"];
+        WHERE user_id=:user_id';
         $statment=$this->conn->prepare($query);
+        $statment->bindValue(":user_id",$_SESSION["user_id"]);
         $statment->execute();
         $result=$statment->fetchall(PDO::FETCH_ASSOC);
         $statment->closeCursor();
@@ -99,9 +107,9 @@ class Payment_Manager{
         $query='SELECT payout_id from payout
         JOIN tickets on tickets.ticket_id=payout.ticket_id
         JOIN events on events.event_id=tickets.event_id
-        WHERE host_id='.$_SESSION["user_id"].' AND payed_out_on IS NULL AND to_host=1';
-
+        WHERE host_id=:user_id AND payed_out_on IS NULL AND to_host=1';
         $statment=$this->conn->prepare($query);
+        $statment->bindValue(":user_id",$_SESSION["user_id"]);
         $statment->execute();
         $payoutIds=$statment->fetchAll(PDO::FETCH_ASSOC);
         $statment->closeCursor();
@@ -111,9 +119,10 @@ class Payment_Manager{
         $query='SELECT payout_id from payout
         JOIN tickets on tickets.ticket_id=payout.ticket_id
         JOIN events on events.event_id=tickets.event_id
-        WHERE attendant_id='.$_SESSION["user_id"].' AND payed_out_on IS NULL AND to_host=0';
+        WHERE attendant_id=:user_id AND payed_out_on IS NULL AND to_host=0';
 
         $statment=$this->conn->prepare($query);
+        $statment->bindValue(":user_id",$_SESSION["user_id"]);
         $statment->execute();
         $payoutIds=$statment->fetchAll(PDO::FETCH_ASSOC);
         $statment->closeCursor();
@@ -138,7 +147,7 @@ class Payment_Manager{
         We store the tokens for these accounts in the primary key columns of the
         stripe_accounts and stripe_external_bank_accounts tables
 
-        In summery a user may only account but can have many bank accounts associated with it
+        In summery a user may have only one account but can have many bank accounts associated with it
     */
 
     function createStripeConnectAccount(){
@@ -146,8 +155,9 @@ class Payment_Manager{
         $stripe = new \Stripe\StripeClient($this->testKey);
 
         //checks if there is a stripe connect account associated with this user
-        $query="SELECT stripe_account_id FROM stripe_accounts WHERE user_id=".$_SESSION["user_id"];
+        $query="SELECT stripe_account_id FROM stripe_accounts WHERE user_id=:user_id";
         $statment=$this->conn->prepare($query);
+        $statment->bindValue(":user_id",$_SESSION["user_id"]);
         $statment->execute();
         $result=$statment->fetch(PDO::FETCH_ASSOC);
         $statment->closeCursor();
@@ -155,8 +165,9 @@ class Payment_Manager{
         //if there isn't an account then we need to make one
         if(empty($result)){
             //gets the user information needed to make the account
-            $query="SELECT email FROM users WHERE user_id=".$_SESSION["user_id"];
+            $query="SELECT email FROM users WHERE user_id=:user_id";
             $statment=$this->conn->prepare($query);
+            $statment->bindValue(":user_id",$_SESSION["user_id"]);
             $statment->execute();
             $result=$statment->fetch(PDO::FETCH_ASSOC);
             $statment->closeCursor();
@@ -212,19 +223,21 @@ class Payment_Manager{
 
     /*
       this function gets a new bank account token from stripe and creates the relationship between the 
-      stripe_account and the stripe_externial_bank_account tables
+      stripe_account and the stripe_externial_bank_account tables in our data base
     */
     function createExternalBankAccountForStripeAccount(){
         $stripe = new \Stripe\StripeClient($this->testKey);
 
-        $query="SELECT stripe_account_id FROM stripe_accounts WHERE user_id=".$_SESSION["user_id"];
+        $query="SELECT stripe_account_id FROM stripe_accounts WHERE user_id=:user_id";
         $statment=$this->conn->prepare($query);
+        $statment->bindValue(":user_id",$_SESSION["user_id"]);
         $statment->execute();
         $account=$statment->fetch(PDO::FETCH_ASSOC);
         $statment->closeCursor();
 
-        $query="SELECT * FROM users WHERE user_id=".$_SESSION["user_id"];
+        $query="SELECT * FROM users WHERE user_id=:user_id";
         $statment=$this->conn->prepare($query);
+        $statment->bindValue(":user_id",$_SESSION["user_id"]);
         $statment->execute();
         $user=$statment->fetch(PDO::FETCH_ASSOC);
         $statment->closeCursor();
@@ -268,8 +281,9 @@ class Payment_Manager{
         try{
         $query="SELECT * from
         stripe_accounts
-        WHERE user_id=".$_SESSION["user_id"];
+        WHERE user_id=:user_id";
         $statment=$this->conn->prepare($query);
+        $statment->bindValue(":user_id",$_SESSION["user_id"]);
         $statment->execute();
         $account=$statment->fetch(PDO::FETCH_ASSOC);
         $statment->closeCursor();
@@ -337,13 +351,16 @@ class Payment_Manager{
         
     }
     public function refund(){
+        $this->conn->beginTransaction();
+
         $stripe = new \Stripe\StripeClient('sk_test_51PHBZMHUca1WAyokRWC4GRaKSYwSdXg4q8nmV95JZBleMJJZhoTFO1iJvo0bGOstU5pxPjMdd0fUfJa0LbtmbjyS00bGOV8UUh');
 
         try{
         $query="SELECT * from
         stripe_accounts
-        WHERE user_id=".$_SESSION["user_id"];
+        WHERE user_id=:user_id";
         $statment=$this->conn->prepare($query);
+        $statment->bindValue(":user_id",$_SESSION["user_id"]);
         $statment->execute();
         $account=$statment->fetch(PDO::FETCH_ASSOC);
         $statment->closeCursor();
@@ -374,6 +391,7 @@ class Payment_Manager{
 
         catch(PDOException $e){
             echo($e->getMessage());
+            $this->conn->rollBack();
             return false;
         }
 
@@ -398,37 +416,33 @@ class Payment_Manager{
                 'stripe_account' => $account["stripe_account_id"], // Specify the connected account ID
             ]);
 
-
+            $this->conn->commit();
             return true;
         } catch (\Stripe\Exception\ApiErrorException $e) {
 
             echo($e->getMessage());
+            $this->conn->rollBack();
             return false;
         }
     }
     public function PaymentIntent(){
         
-        $amount=$_POST["amount"];
+        include_once("Events_Manager.php");
+        $events_manger=new Events_Manager();
+        $event=$events_manger->getRecord($_POST["event_id"]);
+        //As of 7/13/2024 Stripe charges 30 cents per transaction and 2.9% on the total transaction
+        //1 dollar *.029 + 30 cents
+        $totalForTickets=$event["charge"]*$_POST["number_of_tickets"];
+        $stripeFlatFee=.30;
+        $ourFee=$totalForTickets*.10;
+        $amount=($totalForTickets+$stripeFlatFee+$ourFee)*100;
+
+        $amount=(int)$amount;
         $paymentIntent = \Stripe\PaymentIntent::create([
-            'amount' => $amount, // amount in cents, $10.99
+            'amount' => $amount, 
             'currency' => 'usd',
             ]);
         return ['clientSecret' => $paymentIntent->client_secret];
-    }
-    public function PurchaseTicket(){
-        
-        try{
-             $query="INSERT INTO tickets (event_id,user_id) VALUES(:event_id,:user_id)";
-             $statment=$this->conn->prepare($query);
-             $statment->bindValue(":event_id",$_POST["event_id"]);
-             $statment->bindValue(":user_id",$_SESSION["user_id"]);
-             $statment->execute();
-        }
-        catch(PDOException $e){
-            echo($e->getMessage());
-            echo($e->getCode());
-            return $e;
-        }
     }
 }
 

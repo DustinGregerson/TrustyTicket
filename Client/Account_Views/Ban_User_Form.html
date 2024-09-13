@@ -1,0 +1,54 @@
+
+        <div id="Ban_User_Form">
+            <h1>Ban User</h1>
+            <div id="message">NOTE: Banned users can not see your events, but this does not mean you can keep someone from attending your event if the banned user has already bought a ticket, even if you ban them. TrustyTicket will not rule in favor of you in a dispute if you did not allow the banned user to attend the event for a ligament ticket purchase before the ban. 
+            </div>
+            <form id="target" method="POST">
+                <span id="error"></span>
+                <input id="api_function_call" type="hidden" name="api_function_call" value="ban_user">
+                <div class="label_input">
+                    <label>User Name</label>
+                    <input id="username" type="text" placeholder="Ban username" name="username" required>
+                </div>
+                <div class="button">
+                    <button class="button_default" type="submit">Next</button>
+                </div>
+            </form>
+        </div>
+<script>
+    $('#target').submit(function(event) {
+        event.preventDefault();
+        var type='POST';
+        var formData=$(this).serialize();
+        var error=$("#error");
+        var data={};
+        
+        $.ajax({
+            type: type,
+            url: 'http://localhost/project/trustyticket/serviceProvider/API.php',
+            data: formData , 
+            dataType: 'json',
+            encode: true
+        })
+        .done(function(data) {
+            console.log(data);
+            var errorValue=false;
+            if(data['user_is_banned']){
+                error.html(data['invalid_login']);
+                errorValue=true;
+            }
+            else if(data["user_does_not_exist"]){
+                error.html(data['user_does_not_exist'])
+                errorValue=true;
+            }
+            if(!errorValue){
+                window.location.href="http://localhost/project/trustyticket?action=list_banned_users";
+            }
+    
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+                console.error('Error:', textStatus, errorThrown);
+                console.log(data);
+        });
+    });
+</script>

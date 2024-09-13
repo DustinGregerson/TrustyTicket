@@ -13,7 +13,12 @@ function ConvertToBlob(){
     if(isset($_FILES["image"])){
        $file=$_FILES["image"];
        $tempPath=$file["tmp_name"];
+       if(!empty($tempPath)){
        $binaryString=file_get_contents($tempPath);
+       }
+       else{
+        $binaryString=0;
+       }
        return $binaryString;
     }
     else{
