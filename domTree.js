@@ -1,5 +1,6 @@
+//Author Dustin Gregerson
 
-//Most of there expreshions expect that the tag is on one line and there are not nested elements
+//Most of these expreshions expect that the tag is on one line and there are not nested elements
 //The Create Formmated HTML Array function provides this
 const ALL_WHITE_SPACE=/^\s*$/;          //used to find strings that contain nothing but whitespace
 const OPENING_TAG=/^<[^\/!][^>]*>$/;    //used to find an opening tag
@@ -14,8 +15,7 @@ const SCRIPT_OPEN_TAG=/^<script\b.*>/;  //used to find a script opening tag
 const SCRIPT_CLOSE_TAG=/^<\/script>/;   //used to find a script closing tag
 const SINGLE_LINE_COMMENT=/^<!--.*$/;   //used to find a comment line
 const ATTRIBUTES=/(\s\w+="\w*"){1}/g;   //used to find all of the attributes in the opening tag. NOTE: may not be needed
-//Do not think in terms of what may be but what it could be.
-//I must think of this as if css does not exsist but will once it is done.
+//Do not think in terms of what may be but what could be.
 
 //the head is removed because css can not affect the head
 //the scripts are removed because css can not affect the script
@@ -361,12 +361,7 @@ function findTextAndChildPosFromParent(htmlArray,parent){
         }
     }
 }
-//I might need to ignore the text at first and find all the children and then when i have the childrens starting index
-//and ending index i can then find all the text inbetween the childrens starting index and ending index's and the parents
-//starting and ending indexes to determain the were the text is located and at what position
 
-//The problem with this approch is yes i will have the children added to the parent but i will not have the correct position
-//Meaning that i will have to reset all of there positions
 function buildDOMObject(element,openingIndex,closingIndex){
     let domObject=
     {

@@ -12,7 +12,7 @@ session_start();
 session_regenerate_id(true);
 
 //prevents session hijacking by checking that the machine that logged into the account is the same machine that
-//submitted the sesshion cookie to the server
+//submitted the session cookie to the server
 
 if (!isset($_SESSION['ip_address'])) {
     $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
@@ -139,18 +139,4 @@ include("footer.php");
 
 include_once("ServiceProvider/Utilities/Tables_Print.php");
 include_once("ServiceProvider/Utilities/Tables_Query_Builder.php");
-/*
-$tablePrinter=new Tables_Print();
-$tablePrinter->startForm(true,"ServiceProvider/API.php","POST","update");
-$tablePrinter->getTableUpdateInputs("events","0",["times_changed","user_id","event_id","event_code"]);
-$tablePrinter->getTableUpdateInputs("pictures","0",["event_id","picture_id"]);
-$tablePrinter->endForm("Save");
-$tablePrinter->writeFormToFile("test.php");
-*/
-/*
-$queryBuilder=new Tables_Query_Builder();
-$queryBuilder->buildUpdateQuery("events","event_id=:event_id",["times_changed","user_id","event_code"]);
-$queryBuilder->buildStatmentBinder("events",'$_POST',["times_changed","user_id","event_id","event_code"]);
-$queryBuilder->writeToFile("test.php");
-*/
 ?>
